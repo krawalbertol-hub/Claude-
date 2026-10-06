@@ -89,7 +89,7 @@
 
 **Hashtags:** #inteligenciaartificial #mitos #IAparanegocios #pymes #emprendedores #automatizacion #innovacion #transformaciondigital #agenciaIA #negocios
 
-> ⚠️ Antes de publicar este post hay que tener lista la guía (un PDF corto) para enviarla a quien comente. Puedo redactarla.
+> ✅ Guía lista: `instagram/guia/guia-empezar-con-ia-orbixel.pdf` (8 páginas). Envíala por DM a cada persona que comente "GUÍA". La guía termina invitando a escribir "DEMO" por DM para pedir una demostración.
 
 ---
 
