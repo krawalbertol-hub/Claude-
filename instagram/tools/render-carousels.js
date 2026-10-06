@@ -124,5 +124,40 @@ const carrusel3 = [
     }
     console.log(name, slides.length, 'slides');
   }
+  // Portada del reel (9:16). El contenido clave va centrado para que se vea bien
+  // también recortado en la cuadrícula del perfil (3:4).
+  const reel = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
+  const reelHtml = `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}
+    html, body { height:1920px; }
+    .wrap { padding:0 90px; justify-content:center; }
+    .phone { align-self:center; width:640px; padding:34px 36px; border-radius:40px; background:rgba(255,255,255,.07);
+      border:2px solid rgba(255,255,255,.14); box-shadow:0 30px 80px rgba(0,0,0,.45); margin-bottom:70px; }
+    .ph-top { display:flex; justify-content:space-between; font-size:26px; color:#A5A5C8; margin-bottom:24px; }
+    .ph-time { font-size:96px; font-weight:800; font-family:'Inter Display','Inter',sans-serif; color:#fff; letter-spacing:-.03em; text-align:center; margin-bottom:26px; }
+    .msg { display:flex; gap:20px; align-items:center; padding:22px 24px; border-radius:24px; background:rgba(10,10,24,.6); }
+    .av { width:64px; height:64px; border-radius:50%; background:#22C55E; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:28px; color:#0A0A18; }
+    .msg b { display:block; font-size:28px; color:#fff; } .msg span { font-size:26px; color:#C9C9E3; }
+    .reply { margin-top:14px; margin-left:84px; padding:18px 22px; border-radius:22px; font-size:26px; font-weight:600;
+      background:linear-gradient(90deg,#7C3AED,#06B6D4); color:#fff; }
+    h1 { text-align:center; font-size:118px; }
+    .sub { text-align:center; align-self:center; }
+    .hbrand { position:absolute; left:0; right:0; bottom:150px; text-align:center; font-size:30px; color:#A5A5C8; font-weight:500; }
+    .hbrand .brand { justify-content:center; color:#fff; font-weight:600; letter-spacing:.04em; margin-bottom:12px; }
+  </style></head><body><div class="bg"></div><div class="grid"></div><div class="wrap">
+    <div class="phone">
+      <div class="ph-top"><span>WhatsApp</span><span>ahora</span></div>
+      <div class="ph-time">23:47</div>
+      <div class="msg"><div class="av">C</div><div><b>Cliente nuevo</b><span>Hola, ¿tenéis cita para mañana?</span></div></div>
+      <div class="reply">¡Hola! Sí, a las 10:00 o a las 12:30. ¿Cuál prefieres?</div>
+    </div>
+    <h1>Tu negocio, <span class="grad">abierto 24/7</span></h1>
+    <p class="sub">Un asistente de IA que responde, resuelve y agenda mientras duermes.</p>
+  </div>
+  <div class="hbrand"><div class="brand"><span class="dot"></span>ORBIXEL</div>${HANDLE}</div>
+  </body></html>`;
+  await reel.setContent(reelHtml, { waitUntil: 'load' });
+  fs.mkdirSync(path.join(OUT, 'reel-2-asistente-24-7'), { recursive: true });
+  await reel.screenshot({ path: path.join(OUT, 'reel-2-asistente-24-7', 'portada.png') });
+  console.log('reel cover');
   await browser.close();
 })();
