@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  // En GitHub Pages el workflow pasa VITE_BASE=/Claude-/ ; en Netlify o dominio propio es '/'
+  base: process.env.VITE_BASE || '/',
   plugins: [react(), tailwindcss()],
   build: {
     target: 'es2020',

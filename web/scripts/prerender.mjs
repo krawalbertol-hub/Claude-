@@ -5,14 +5,14 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
-const { render, allRoutes, ROUTES, SITE } = await import(path.join(root, 'dist-ssr/entry-server.js'));
+const { render, allRoutes, ROUTES, SITE, BASE } = await import(path.join(root, 'dist-ssr/entry-server.js'));
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 
 // Precarga de las fuentes latinas (evita saltos de texto en el hero)
 const assets = fs.readdirSync(path.join(dist, 'assets'));
 const fontPreloads = assets
   .filter((f) => /^(space-grotesk|inter)-latin-wght-normal.*\.woff2$/.test(f))
-  .map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin />`)
+  .map((f) => `<link rel="preload" href="${BASE}assets/${f}" as="font" type="font/woff2" crossorigin />`)
   .join('\n    ');
 
 for (const url of allRoutes()) {
@@ -21,7 +21,7 @@ for (const url of allRoutes()) {
     .replace('<html lang="es"', `<html lang="${lang}"`)
     .replace('<!--app-head-->', `${fontPreloads}\n    ${head}`)
     .replace('<!--app-html-->', html);
-  const out = path.join(dist, url, 'index.html');
+  const out = path.join(dist, url.slice(BASE.length), 'index.html');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, page);
   console.log('✓', url);
@@ -29,7 +29,7 @@ for (const url of allRoutes()) {
 
 // 404
 {
-  const { html, head } = render('/');
+  const { html, head } = render(ROUTES.es.home);
   fs.writeFileSync(path.join(dist, '404.html'), template.replace('<!--app-head-->', `${fontPreloads}\n    ${head}`).replace('<!--app-html-->', html));
 }
 
@@ -42,6 +42,7 @@ fs.writeFileSync(
     .map((u) => `  <url><loc>${SITE.url}${u}</loc><lastmod>${today}</lastmod>${alt}</url>`)
     .join('\n')}\n</urlset>\n`,
 );
-fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}/sitemap.xml\n`);
+fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}${BASE}sitemap.xml\n`);
 fs.rmSync(path.join(root, 'dist-ssr'), { recursive: true, force: true });
+fs.writeFileSync(path.join(dist, '.nojekyll'), ''); // GitHub Pages: servir tal cual
 console.log('Prerender completo');

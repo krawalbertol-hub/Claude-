@@ -64,3 +64,12 @@ src/
 - La analítica (GA4) solo se inyecta tras pulsar «Aceptar» en el banner de cookies.
 - Lighthouse (build local, Chrome headless): móvil 91–92 rendimiento · 100 accesibilidad · 100 buenas prácticas · 100 SEO;
   escritorio 100 · 100 · 100 · 100.
+
+## GitHub Pages
+La carpeta `docs/` de la raíz contiene la web ya compilada para `https://krawalbertol-hub.github.io/Claude-/`.
+En GitHub: *Settings → Pages → Build and deployment → Source: Deploy from a branch*, rama
+`claude/laughing-carson-tkoiy3` (o la rama donde esté) y carpeta `/docs` → *Save*.
+Después de cambiar algo, regenera `docs/` con `cd web && npm run build:pages` y haz commit.
+En GitHub Pages no funciona Netlify Forms: crea un formulario en Formspree, pon su URL en
+`VITE_FORM_ENDPOINT` (archivo `web/.env`) y vuelve a ejecutar `npm run build:pages`.
+Mientras tanto, si el envío falla, la web muestra el email y el WhatsApp.

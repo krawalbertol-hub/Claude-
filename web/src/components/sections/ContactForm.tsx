@@ -1,6 +1,6 @@
 import { useRef, useState, type FormEvent } from 'react';
 import { useI18n } from '../../i18n';
-import { ROUTES, SITE, whatsappLink } from '../../config/site';
+import { BASE, ROUTES, SITE, whatsappLink } from '../../config/site';
 import { SplitText } from '../ui/SplitText';
 import { Icon } from '../ui/Icon';
 import { useMagnetic } from '../ui/hooks';
@@ -46,7 +46,7 @@ export function ContactForm() {
       const endpoint = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
       const res = endpoint
         ? await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: fd })
-        : await fetch('/', {
+        : await fetch(BASE, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(fd as unknown as Record<string, string>).toString(),

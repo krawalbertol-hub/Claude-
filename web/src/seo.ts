@@ -1,6 +1,6 @@
 import { DICTS } from './i18n';
 import { LEGAL } from './i18n/legal';
-import { ROUTES, SITE, resolveRoute } from './config/site';
+import { BASE, ROUTES, SITE, resolveRoute } from './config/site';
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
@@ -12,7 +12,7 @@ export function buildHead(url: string): string {
   const title = isHome ? t.meta.title : `${LEGAL[lang][page].title} · ORBIXEL Agency`;
   const desc = t.meta.description;
   const canonical = SITE.url + ROUTES[lang][page];
-  const og = `${SITE.url}/og-image.png`;
+  const og = `${SITE.url}${BASE}og-image.png`;
   const tags = [
     `<title>${esc(title)}</title>`,
     `<meta name="description" content="${esc(desc)}" />`,
@@ -39,12 +39,12 @@ export function buildHead(url: string): string {
     const business = {
       '@context': 'https://schema.org',
       '@type': 'ProfessionalService',
-      '@id': `${SITE.url}/#business`,
+      '@id': `${SITE.url}${BASE}#business`,
       name: 'ORBIXEL Agency',
       alternateName: 'Orbixel',
       description: desc,
       url: SITE.url + ROUTES[lang].home,
-      logo: `${SITE.url}/icon-512.png`,
+      logo: `${SITE.url}${BASE}icon-512.png`,
       image: og,
       email: SITE.email,
       ...(SITE.phone ? { telephone: SITE.phone } : {}),

@@ -1,8 +1,12 @@
 // Configuración general del sitio. Todo lo marcado con TODO lo tiene que rellenar Orbixel.
+
+/** Ruta base donde se publica la web ('/' en un dominio propio, '/Claude-/' en GitHub Pages). */
+export const BASE: string = import.meta.env.BASE_URL || '/';
+
 export const SITE = {
   name: 'ORBIXEL Agency',
-  // TODO: dominio definitivo (también en public/robots.txt se genera solo en el build)
-  url: 'https://orbixel.agency',
+  // TODO: dominio definitivo, sin barra final. En GitHub Pages lo pone solo el workflow (VITE_SITE_ORIGIN).
+  url: (import.meta.env.VITE_SITE_ORIGIN as string | undefined) || 'https://orbixel.agency',
   email: 'contact.orbixel@gmail.com',
   // TODO: teléfono en formato internacional sin espacios ni «+», p. ej. 34600111222
   whatsapp: '' as string,
@@ -32,9 +36,10 @@ export type Lang = 'es' | 'ca';
 
 export type PageKey = 'home' | 'legal' | 'privacy' | 'cookies';
 
+const R = (p: string) => BASE + p;
 export const ROUTES: Record<Lang, Record<PageKey, string>> = {
-  es: { home: '/', legal: '/aviso-legal/', privacy: '/privacidad/', cookies: '/cookies/' },
-  ca: { home: '/ca/', legal: '/ca/avis-legal/', privacy: '/ca/privacitat/', cookies: '/ca/cookies/' },
+  es: { home: R(''), legal: R('aviso-legal/'), privacy: R('privacidad/'), cookies: R('cookies/') },
+  ca: { home: R('ca/'), legal: R('ca/avis-legal/'), privacy: R('ca/privacitat/'), cookies: R('ca/cookies/') },
 };
 
 export function resolveRoute(pathname: string): { lang: Lang; page: PageKey } {
@@ -44,7 +49,7 @@ export function resolveRoute(pathname: string): { lang: Lang; page: PageKey } {
       if (path === p) return { lang, page: page as PageKey };
     }
   }
-  return { lang: p.startsWith('/ca/') ? 'ca' : 'es', page: 'home' };
+  return { lang: p.startsWith(BASE + 'ca/') ? 'ca' : 'es', page: 'home' };
 }
 
 export const whatsappLink = (text: string) =>
