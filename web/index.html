@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#05060A" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!--app-head-->
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove('no-js'); d.classList.add('js');
+        var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        try { if (!rm && !sessionStorage.getItem('orbixel-loaded')) d.classList.add('is-loading'); } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="loader" aria-hidden="true">
+      <svg viewBox="0 0 64 64" class="loader-mark">
+        <defs><linearGradient id="lg" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse"><stop stop-color="#6C5CFF"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs>
+        <path class="loader-arc" pathLength="1" d="M53.95 30.47A22 22 0 1 1 40.24 11.6" fill="none" stroke="url(#lg)" stroke-width="8"/>
+        <rect class="loader-px loader-px1" x="40.87" y="10.74" width="4.6" height="4.6" rx=".8" fill="#22D3EE"/>
+        <rect class="loader-px loader-px2" x="48.15" y="6.89" width="2.8" height="2.8" rx=".5" fill="#22D3EE"/>
+        <rect class="loader-px loader-sat" x="45.11" y="14.92" width="11.5" height="11.5" rx="2.6" fill="#F5F6FA"/>
+      </svg>
+    </div>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
