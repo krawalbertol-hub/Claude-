@@ -1,0 +1,481 @@
+/* ==========================================================================
+   ROCADVENTUR · Estils
+   Mobile-first: els estils base són per a mòbil i s'amplien amb media queries.
+   ========================================================================== */
+
+/* ---------- 1. Variables (paleta i mides) ----------
+   [PER CONFIRMAR] Ajusta --c-marca i --c-marca-2 als colors exactes del logo
+   de l'Institut Rocagrossa (img/logo-rocagrossa.png). */
+:root {
+  --c-marca: #0b2545;        /* blau fosc institucional */
+  --c-marca-2: #13315c;      /* blau intermedi */
+  --c-gel: #8ecae6;          /* blau gel (accent fred) */
+  --c-gel-clar: #eaf6fc;     /* fons gel molt clar */
+  --c-blanc: #ffffff;
+  --c-energia: #ff7a29;      /* taronja energètic per a botons (text fosc a sobre) */
+  --c-energia-fosc: #f25c05;
+  --c-text: #0d1b2a;
+  --c-text-suau: #3d5068;    /* AA sobre blanc i gel clar */
+  --c-vora: #d4e4ef;
+
+  --f-display: "Anton", "Impact", "Arial Narrow Bold", sans-serif;
+  --f-text: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radi: 16px;
+  --radi-gran: 24px;
+  --ombra: 0 10px 30px rgba(11, 37, 69, .12);
+  --ombra-forta: 0 20px 50px rgba(11, 37, 69, .25);
+  --header-h: 64px;
+  --gutter: 16px;
+}
+
+/* ---------- 2. Reset bàsic ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--f-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--c-text);
+  background: var(--c-blanc);
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4 { line-height: 1.1; }
+
+/* Focus visible per a navegació amb teclat */
+:focus-visible { outline: 3px solid var(--c-energia); outline-offset: 3px; border-radius: 4px; }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 200;
+  background: var(--c-energia); color: var(--c-text); font-weight: 700;
+  padding: 10px 16px; border-radius: 8px; text-decoration: none; transition: top .2s;
+}
+.skip-link:focus { top: 12px; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Icones: totes fan servir traç (stroke) i hereten el color */
+.icon {
+  width: 24px; height: 24px; flex-shrink: 0;
+  fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Textos pendents de confirmar: fàcils de veure */
+.pending {
+  background: #fff3b0; color: #5a4300; padding: 0 .35em; border-radius: 4px;
+  font-weight: 700; font-size: .92em;
+}
+
+/* ---------- 3. Layout ---------- */
+.container { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: var(--gutter); }
+.container--narrow { max-width: 800px; }
+
+.section { padding-block: 72px; position: relative; }
+.section--compact { padding-block: 56px; }
+.section--ice { background: var(--c-gel-clar); }
+.section--dark {
+  background: radial-gradient(1200px 500px at 80% -10%, #1d4e89 0%, transparent 60%), var(--c-marca);
+  color: var(--c-blanc);
+}
+
+.eyebrow {
+  display: inline-block; font-weight: 800; font-size: .8rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c-energia-fosc); margin-bottom: 10px;
+}
+/* Sobre fons clar el taronja fosc no arriba a AA en text petit: el fem més fosc */
+.section:not(.section--dark) .eyebrow { color: #b34400; }
+.eyebrow--light { color: var(--c-gel); }
+
+.section__title {
+  font-family: var(--f-display); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(2.2rem, 8vw, 3.8rem); letter-spacing: .01em; margin-bottom: 20px;
+}
+.section__intro { color: #cfe3f1; margin-top: -8px; margin-bottom: 32px; }
+.lead { font-size: 1.125rem; color: var(--c-text-suau); max-width: 62ch; }
+.lead strong { color: var(--c-text); }
+
+/* ---------- 4. Botons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 12px 24px; border-radius: 999px; border: 2px solid transparent;
+  font-weight: 800; font-size: 1rem; text-decoration: none; letter-spacing: .01em;
+  transition: transform .2s, box-shadow .2s, background-color .2s, color .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--primary { background: var(--c-energia); color: var(--c-text); box-shadow: 0 8px 24px rgba(255, 122, 41, .4); }
+.btn--primary:hover { background: #ff8f4a; }
+.btn--ghost { border-color: rgba(255,255,255,.7); color: var(--c-blanc); }
+.btn--ghost:hover { background: var(--c-blanc); color: var(--c-marca); }
+.btn--ghost-dark { border-color: var(--c-marca); color: var(--c-marca); background: transparent; }
+.btn--ghost-dark:hover { background: var(--c-marca); color: var(--c-blanc); }
+.btn--small { min-height: 42px; padding: 8px 18px; font-size: .95rem; }
+
+/* ---------- 5. Capçalera ---------- */
+.header {
+  position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--header-h);
+  background: rgba(11, 37, 69, .0); color: var(--c-blanc);
+  transition: background-color .3s, box-shadow .3s, backdrop-filter .3s;
+}
+.header.is-scrolled, .header.is-open {
+  background: rgba(11, 37, 69, .94); box-shadow: 0 6px 20px rgba(0,0,0,.18);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand__logo { width: 40px; height: 40px; object-fit: contain; background: var(--c-blanc); border-radius: 10px; padding: 3px; }
+.brand__name { font-family: var(--f-display); font-size: 1.35rem; letter-spacing: .04em; }
+
+.nav-toggle {
+  width: 48px; height: 48px; border: 0; border-radius: 12px; background: rgba(255,255,255,.1);
+  display: grid; place-items: center; color: var(--c-blanc);
+}
+.nav-toggle__bar, .nav-toggle__bar::before, .nav-toggle__bar::after {
+  display: block; width: 22px; height: 2.5px; background: currentColor; border-radius: 2px;
+  transition: transform .25s, opacity .25s; position: relative;
+}
+.nav-toggle__bar::before, .nav-toggle__bar::after { content: ""; position: absolute; left: 0; }
+.nav-toggle__bar::before { top: -7px; }
+.nav-toggle__bar::after { top: 7px; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar::before { transform: translateY(7px) rotate(45deg); background: var(--c-blanc); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar::after { transform: translateY(-7px) rotate(-45deg); background: var(--c-blanc); }
+
+/* Menú mòbil: panell desplegable */
+.nav {
+  position: fixed; top: var(--header-h); left: 0; right: 0;
+  background: rgba(11, 37, 69, .98); padding: 8px var(--gutter) 24px;
+  transform: translateY(-8px); opacity: 0; visibility: hidden;
+  transition: opacity .25s, transform .25s, visibility .25s;
+}
+.nav.is-open { transform: none; opacity: 1; visibility: visible; }
+.nav__list a {
+  display: block; padding: 14px 4px; font-weight: 700; font-size: 1.1rem; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.nav__list a:hover, .nav__list a.is-active { color: var(--c-energia); }
+
+/* ---------- 6. Hero ---------- */
+.hero {
+  position: relative; min-height: 100svh; display: flex; align-items: center;
+  padding: calc(var(--header-h) + 40px) 0 140px; overflow: hidden; color: var(--c-blanc);
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(142, 202, 230, .35), transparent 60%),
+    radial-gradient(700px 500px at 90% 30%, rgba(255, 122, 41, .18), transparent 60%),
+    linear-gradient(170deg, #0b2545 0%, #13315c 55%, #1d4e89 100%);
+}
+.hero__content { position: relative; z-index: 2; text-align: center; }
+.hero__tag {
+  display: inline-block; font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: 8px 14px; border: 1px solid rgba(142, 202, 230, .5); border-radius: 999px;
+  background: rgba(142, 202, 230, .12); color: #d9eef8; margin-bottom: 22px;
+}
+
+/* Tractament de logotip per a ROCADVENTUR */
+.hero__title { margin-bottom: 18px; }
+.hero__title-main {
+  position: relative; display: inline-block;
+  font-family: var(--f-display); font-weight: 400; line-height: .9;
+  font-size: clamp(3.1rem, 15.5vw, 10rem); letter-spacing: .01em;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #bfe3f4 70%, #8ecae6 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  transform: skewX(-6deg);
+  filter: drop-shadow(0 6px 0 var(--c-energia-fosc)) drop-shadow(0 18px 30px rgba(0,0,0,.35));
+}
+/* Línia de "gel" sota el títol */
+.hero__title-main::after {
+  content: ""; position: absolute; left: 6%; right: 6%; bottom: -14px; height: 6px; border-radius: 6px;
+  background: linear-gradient(90deg, transparent, var(--c-gel), var(--c-energia), var(--c-gel), transparent);
+}
+.hero__subtitle { font-size: clamp(1.1rem, 4.4vw, 1.6rem); font-weight: 500; margin: 26px auto 22px; max-width: 40ch; color: #e6f2fa; }
+.hero__subtitle strong { color: var(--c-energia); font-weight: 800; }
+
+.hero__info { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 28px; font-weight: 600; }
+.hero__info li { display: flex; align-items: center; gap: 10px; }
+.hero__info .icon { color: var(--c-gel); width: 22px; height: 22px; }
+.hero .pending { font-size: .95em; }
+
+.countdown { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 460px; margin: 0 auto 8px; }
+.countdown__item {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(142, 202, 230, .3);
+  border-radius: 14px; padding: 12px 4px 10px; backdrop-filter: blur(4px);
+}
+.countdown__num { display: block; font-family: var(--f-display); font-size: clamp(1.8rem, 9vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.countdown__label { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: #cfe3f1; margin-top: 4px; }
+.countdown__msg { font-weight: 700; color: var(--c-energia); margin-top: 8px; }
+
+.hero__actions { display: flex; flex-direction: column; gap: 12px; align-items: stretch; max-width: 340px; margin: 28px auto 0; }
+
+/* Muntanyes nevades a la part inferior */
+.hero__mountains { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 160px; z-index: 1; }
+.hero__mountains .m-back { fill: #2a5d94; opacity: .55; }
+.hero__mountains .m-front { fill: var(--c-blanc); }
+
+/* Neu: flocs generats amb JS (molt lleugers, només CSS transform) */
+.hero__snow { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.flake {
+  position: absolute; top: -10px; width: var(--s, 6px); height: var(--s, 6px);
+  background: #fff; border-radius: 50%; opacity: var(--o, .7);
+  animation: caure var(--d, 12s) linear var(--del, 0s) infinite;
+}
+@keyframes caure {
+  to { transform: translate3d(var(--x, 30px), 105vh, 0); }
+}
+
+/* ---------- 7. Què és: estadístiques ---------- */
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.stat {
+  background: var(--c-blanc); border: 1px solid var(--c-vora); border-radius: var(--radi);
+  padding: 22px 16px; text-align: center; box-shadow: var(--ombra); position: relative; overflow: hidden;
+}
+.stat::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: linear-gradient(90deg, var(--c-gel), var(--c-energia)); }
+.stat__num { display: block; font-family: var(--f-display); font-size: clamp(2.6rem, 11vw, 3.8rem); line-height: 1; color: var(--c-marca); }
+.stat__num small { font-size: .45em; margin-left: 4px; }
+.stat__label { display: block; margin-top: 6px; font-weight: 600; color: var(--c-text-suau); font-size: .95rem; }
+
+/* ---------- 8. Com funciona: passos ---------- */
+.steps { display: grid; gap: 14px; counter-reset: pas; }
+.step {
+  background: var(--c-blanc); border-radius: var(--radi); padding: 24px 22px; box-shadow: var(--ombra);
+  border-left: 5px solid var(--c-gel); position: relative;
+}
+.step__num { font-family: var(--f-display); font-size: 2.4rem; line-height: 1; color: var(--c-gel); display: block; margin-bottom: 8px; }
+.step__title { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; color: var(--c-marca); }
+.step p { color: var(--c-text-suau); }
+.step--win { background: var(--c-marca); color: var(--c-blanc); border-left-color: var(--c-energia); }
+.step--win .step__num { color: var(--c-energia); }
+.step--win .step__title { color: var(--c-blanc); }
+.step--win p { color: #e6f2fa; }
+
+/* ---------- 9. Proves: targetes ---------- */
+.tests { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.test-card {
+  width: 100%; height: 100%; text-align: left; color: var(--c-blanc);
+  background: linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+  border: 1px solid rgba(142, 202, 230, .25); border-radius: var(--radi);
+  padding: 18px 14px 16px; display: flex; flex-direction: column; gap: 12px; position: relative;
+  transition: transform .25s, border-color .25s, background-color .25s, box-shadow .25s;
+}
+.test-card:hover, .test-card:focus-visible {
+  transform: translateY(-4px); border-color: var(--c-energia);
+  background-color: rgba(255,255,255,.06); box-shadow: 0 16px 40px rgba(0,0,0,.3);
+}
+.test-card__num {
+  position: absolute; top: 10px; right: 12px; font-family: var(--f-display);
+  font-size: 2rem; line-height: 1; color: rgba(142, 202, 230, .35);
+}
+.test-card__icon {
+  width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+  background: var(--c-gel); color: var(--c-marca);
+}
+.test-card__icon .icon { width: 32px; height: 32px; stroke-width: 2.8; }
+.test-card__title { font-weight: 800; font-size: 1.02rem; line-height: 1.25; }
+.test-card__tag { font-size: .8rem; color: #cfe3f1; }
+.test-card__more { margin-top: auto; font-size: .82rem; font-weight: 700; color: var(--c-energia); }
+
+/* ---------- 10. Modal ---------- */
+.modal {
+  border: 0; padding: 0; background: transparent; width: min(560px, calc(100% - 24px));
+  max-height: calc(100% - 24px); margin: auto; color: var(--c-text);
+}
+.modal::backdrop { background: rgba(6, 20, 38, .7); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.modal[open] .modal__box { animation: modal-in .28s ease-out; }
+@keyframes modal-in { from { opacity: 0; transform: translateY(20px) scale(.98); } }
+.modal__box { background: var(--c-blanc); border-radius: var(--radi-gran); padding: 28px 22px 22px; position: relative; box-shadow: var(--ombra-forta); }
+.modal__close {
+  position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%;
+  border: 0; background: var(--c-gel-clar); color: var(--c-marca); display: grid; place-items: center;
+}
+.modal__close:hover { background: var(--c-gel); }
+.modal__head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-right: 44px; }
+.modal__icon { width: 64px; height: 64px; border-radius: 18px; background: var(--c-marca); color: var(--c-gel); display: grid; place-items: center; flex-shrink: 0; }
+.modal__icon .icon { width: 38px; height: 38px; stroke-width: 2.6; }
+.modal__num { font-weight: 800; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: #b34400; }
+.modal__title { font-family: var(--f-display); font-weight: 400; font-size: 1.9rem; text-transform: uppercase; color: var(--c-marca); }
+.modal__desc { color: var(--c-text-suau); margin-bottom: 18px; }
+.modal__score { background: var(--c-gel-clar); border-radius: var(--radi); padding: 16px 18px; }
+.modal__score h4 { font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--c-marca); margin-bottom: 8px; }
+.modal__score ul { display: grid; gap: 6px; }
+.modal__score li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--c-vora); }
+.modal__score li:last-child { border-bottom: 0; }
+.modal__score .pts { font-weight: 800; color: var(--c-marca); white-space: nowrap; }
+.modal__nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 18px; }
+
+/* ---------- 11. Horari: timeline ---------- */
+.timeline { position: relative; display: grid; gap: 18px; padding-left: 28px; }
+.timeline::before {
+  content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 3px; border-radius: 3px;
+  background: linear-gradient(var(--c-gel), var(--c-energia));
+}
+.timeline__item {
+  position: relative; background: var(--c-blanc); border: 1px solid var(--c-vora);
+  border-radius: var(--radi); padding: 14px 18px; box-shadow: var(--ombra);
+}
+.timeline__item::before {
+  content: ""; position: absolute; left: -27px; top: 20px; width: 17px; height: 17px; border-radius: 50%;
+  background: var(--c-blanc); border: 4px solid var(--c-gel);
+}
+.timeline__item--key { background: var(--c-marca); color: var(--c-blanc); border-color: var(--c-marca); }
+.timeline__item--key::before { border-color: var(--c-energia); }
+.timeline__time { display: block; font-family: var(--f-display); font-size: 1.7rem; line-height: 1.1; color: var(--c-marca); }
+.timeline__item--key .timeline__time { color: var(--c-energia); }
+.timeline__item p { color: var(--c-text-suau); }
+.timeline__item--key p { color: #e6f2fa; }
+
+/* ---------- 12. On es fa ---------- */
+.place { display: grid; gap: 24px; }
+.place__list { display: grid; gap: 10px; margin-bottom: 20px; }
+.place__list li { padding-left: 26px; position: relative; color: var(--c-text-suau); }
+.place__list li::before {
+  content: ""; position: absolute; left: 0; top: .5em; width: 12px; height: 12px; border-radius: 3px;
+  background: var(--c-energia); transform: rotate(45deg);
+}
+.place__list strong { color: var(--c-text); }
+.map { border-radius: var(--radi); overflow: hidden; box-shadow: var(--ombra); aspect-ratio: 4 / 3; background: var(--c-vora); }
+.map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.stations { background: var(--c-blanc); border-radius: var(--radi-gran); padding: 18px; box-shadow: var(--ombra); }
+.stations__svg { width: 100%; height: auto; max-width: 440px; margin-inline: auto; }
+.stations figcaption { text-align: center; font-size: .9rem; color: var(--c-text-suau); margin-top: 10px; }
+/* Estils dels elements de l'esquema (creats amb JS) */
+.st-ring { fill: none; stroke: var(--c-vora); stroke-width: 2; stroke-dasharray: 6 8; }
+.st-arrow { fill: none; stroke: var(--c-energia); stroke-width: 3; stroke-linecap: round; }
+.st-arrow-head { fill: var(--c-energia); }
+.st-center { fill: var(--c-marca); }
+.st-center-txt { fill: #fff; font: 700 13px var(--f-text); text-anchor: middle; }
+.st-dot { fill: var(--c-gel); stroke: var(--c-marca); stroke-width: 3; }
+.st-num { fill: var(--c-marca); font: 400 24px var(--f-display); text-anchor: middle; dominant-baseline: central; }
+.st-label { fill: var(--c-text-suau); font: 600 11px var(--f-text); text-anchor: middle; }
+
+/* ---------- 13. Normes ---------- */
+.rules { display: grid; gap: 12px; }
+.rule {
+  display: flex; align-items: center; gap: 14px; background: var(--c-gel-clar);
+  border-radius: var(--radi); padding: 14px 16px;
+}
+.rule .icon {
+  width: 46px; height: 46px; padding: 10px; border-radius: 12px; background: var(--c-marca); color: var(--c-gel);
+  stroke-width: 3.2;
+}
+.rule p { font-weight: 600; }
+
+.inclusion {
+  margin-top: 32px; border-radius: var(--radi-gran); padding: 28px 22px; color: var(--c-blanc);
+  background: linear-gradient(135deg, var(--c-marca) 0%, #1d4e89 100%); position: relative; overflow: hidden;
+}
+.inclusion::after {
+  content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,122,41,.4), transparent 70%);
+}
+.inclusion__quote { font-family: var(--f-display); font-size: clamp(1.6rem, 6vw, 2.4rem); line-height: 1.15; margin-bottom: 10px; color: var(--c-blanc); }
+.inclusion p:last-child { color: #e6f2fa; max-width: 60ch; }
+
+/* ---------- 14. Què cal portar ---------- */
+.kit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.kit__item {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+  padding: 22px 12px; border-radius: var(--radi); background: rgba(255,255,255,.07);
+  border: 1px solid rgba(142, 202, 230, .25); font-weight: 700;
+}
+.kit__item .icon { width: 44px; height: 44px; color: var(--c-energia); stroke-width: 2.6; }
+
+/* ---------- 15. FAQ (acordió amb <details>) ---------- */
+.faq { display: grid; gap: 12px; }
+.faq__item { border: 1px solid var(--c-vora); border-radius: var(--radi); background: var(--c-blanc); box-shadow: var(--ombra); overflow: hidden; }
+.faq__item summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px 20px; font-weight: 800; font-size: 1.05rem; color: var(--c-marca);
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary .icon { color: var(--c-energia-fosc); transition: transform .25s; }
+.faq__item[open] summary .icon { transform: rotate(45deg); }
+.faq__item p { padding: 0 20px 18px; color: var(--c-text-suau); }
+
+/* ---------- 16. Peu de pàgina ---------- */
+.footer { background: #071a31; color: #cfe3f1; padding-top: 48px; }
+.footer__inner { display: grid; gap: 28px; padding-bottom: 32px; }
+.footer__brand { display: flex; gap: 16px; align-items: center; }
+.footer__logo { width: 64px; height: 64px; object-fit: contain; background: var(--c-blanc); border-radius: 14px; padding: 6px; }
+.footer__title { font-family: var(--f-display); font-size: 1.8rem; color: var(--c-blanc); letter-spacing: .03em; line-height: 1.1; }
+.footer__label { font-weight: 800; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--c-gel); margin-bottom: 8px; }
+.footer__team ul { display: flex; flex-wrap: wrap; gap: 8px; }
+.footer__team li { background: rgba(255,255,255,.08); border-radius: 999px; padding: 6px 14px; font-weight: 600; color: var(--c-blanc); }
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,.1); padding-block: 18px; display: flex; flex-wrap: wrap;
+  justify-content: space-between; gap: 10px; font-size: .9rem;
+}
+.footer__bottom a { color: var(--c-gel); font-weight: 700; }
+
+/* ---------- 17. Botó tornar a dalt ---------- */
+.to-top {
+  position: fixed; right: 16px; bottom: 16px; z-index: 90; width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--c-energia); color: var(--c-text);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity .25s, transform .25s, visibility .25s;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top .icon { stroke-width: 4; }
+
+/* ---------- 18. Animacions d'aparició ---------- */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   Media queries (de petit a gran)
+   ========================================================================== */
+@media (min-width: 560px) {
+  .hero__actions { flex-direction: row; justify-content: center; max-width: none; }
+  .hero__info { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px 24px; }
+  .tests { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kit { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .modal__box { padding: 34px 32px 28px; }
+}
+
+@media (min-width: 900px) {
+  :root { --header-h: 76px; --gutter: 24px; }
+  .section { padding-block: 104px; }
+  .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .tests { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+  .rules { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .rule { flex-direction: column; align-items: flex-start; padding: 20px; }
+  .place { grid-template-columns: 1.1fr 1fr; align-items: start; gap: 32px; }
+  .footer__inner { grid-template-columns: 1.4fr 1fr; align-items: center; }
+  .hero__mountains { height: 220px; }
+
+  /* Menú d'escriptori: horitzontal, sempre visible */
+  .nav-toggle { display: none; }
+  .nav { position: static; background: none; padding: 0; transform: none; opacity: 1; visibility: visible; }
+  .nav__list { display: flex; gap: 4px; }
+  .nav__list a { border: 0; padding: 8px 12px; font-size: .95rem; border-radius: 999px; }
+  .nav__list a:hover, .nav__list a.is-active { background: rgba(255,255,255,.1); }
+  .brand__logo { width: 46px; height: 46px; }
+
+  /* Timeline horitzontal en escriptori */
+  .timeline { grid-template-columns: repeat(6, minmax(0, 1fr)); padding-left: 0; padding-top: 34px; gap: 14px; }
+  .timeline::before { left: 0; right: 0; top: 8px; bottom: auto; width: auto; height: 3px; background: linear-gradient(90deg, var(--c-gel), var(--c-energia)); }
+  .timeline__item::before { left: 18px; top: -34px; }
+}
+
+@media (min-width: 1200px) {
+  .hero__title-main { font-size: 10.5rem; }
+}
+
+/* Respecta l'usuari que prefereix menys moviment */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .hero__snow { display: none; }
+  .js .reveal { opacity: 1; transform: none; }
+}

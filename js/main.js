@@ -1,0 +1,401 @@
+/* ==========================================================================
+   ROCADVENTUR · JavaScript (vanilla, sense dependències)
+   ========================================================================== */
+
+/* ---------- CONFIGURACIÓ ----------
+   [PER CONFIRMAR] Data i hora d'inici de l'activitat (format AAAA-MM-DDTHH:MM:SS, hora local).
+   Quan tingueu la data definitiva, canvieu-la aquí i també el text del hero a index.html. */
+const DATA_ACTIVITAT = '2027-02-12T09:00:00';
+
+/* Llista de les 10 proves. Cada prova té:
+   - titol, etiqueta (subtítol curt), icona (id del sprite SVG)
+   - descripcio i punts (llista de regles de puntuació: [text, punts]) */
+const PROVES = [
+  {
+    titol: 'Crossbar Challenge',
+    etiqueta: 'Futbol',
+    icona: 'i-travesser',
+    descripcio: 'Xuts per torns per tocar el travesser de la porteria. Precisió i sang freda.',
+    punts: [
+      ['Cada toc al travesser', '1 punt'],
+      ['Només compten els encerts dins del temps', '—']
+    ]
+  },
+  {
+    titol: 'Globus volador',
+    etiqueta: 'Coordinació',
+    icona: 'i-globus',
+    descripcio: 'Porteu un globus del punt A al punt B sense que toqui a terra. Ningú no el pot tocar dues vegades seguides.',
+    punts: [
+      ['Arribar al punt B sense que caigui', 'Punts base'],
+      ['Variants amb parts del cos concretes', 'Més punts']
+    ]
+  },
+  {
+    titol: "Pilota a l'aro",
+    etiqueta: 'Punteria',
+    icona: 'i-aro',
+    descripcio: 'Llançament tipus petanca: heu de ficar la pilota dins d\'un cèrcol col·locat a terra.',
+    punts: [
+      ['Pilota dins del cèrcol', 'Punts'],
+      ['Com més distància', 'Més punts']
+    ]
+  },
+  {
+    titol: 'Cursa de la cullera',
+    etiqueta: 'Equilibri',
+    icona: 'i-cullera',
+    descripcio: 'Porteu pilotes de ping-pong del punt A al B amb una cullera a la boca, sense mans. Si cau, tornes a començar.',
+    punts: [
+      ['Cada pilota que arriba al punt B', '1 punt'],
+      ['Si la pilota cau', 'Torna a l\'inici']
+    ]
+  },
+  {
+    titol: 'Tirs de bàsquet',
+    etiqueta: 'Bàsquet',
+    icona: 'i-basquet',
+    descripcio: 'Tres nivells de tir: tir lliure, mitja distància i triple. I compte: hi ha una ruleta sorpresa!',
+    punts: [
+      ['Tir lliure', 'Menys punts'],
+      ['Mitja distància', 'Punts mitjans'],
+      ['Triple', 'Més punts'],
+      ['Ruleta sorpresa', '?']
+    ]
+  },
+  {
+    titol: 'Encerta la galleda',
+    etiqueta: 'Precisió',
+    icona: 'i-galleda',
+    descripcio: 'Amb una pala de bàdminton, feu entrar la pilota a una de les 4 galledes.',
+    punts: [
+      ['Galleda més propera', 'Menys punts'],
+      ['Galleda més llunyana', 'Més punts']
+    ]
+  },
+  {
+    titol: 'El nus humà',
+    etiqueta: 'Cooperació',
+    icona: 'i-nus',
+    descripcio: 'Amb els ulls tancats, us doneu les mans. Després heu de desfer el nus sense deixar-vos anar.',
+    punts: [
+      ['Menys de 2 minuts', '4 punts'],
+      ['De 2 a 3 minuts', '3 punts'],
+      ['De 3 a 4 minuts', '2 punts'],
+      ['Més de 4 minuts', '1 punt']
+    ]
+  },
+  {
+    titol: 'Tir amb arc',
+    etiqueta: 'Punteria',
+    icona: 'i-arc',
+    descripcio: 'Fletxes amb ventosa contra una diana. Apunta bé i respira.',
+    punts: [
+      ['Segons la zona de la diana on toqui', 'Punts per zona'],
+      ['Centre de la diana', 'Màxim']
+    ]
+  },
+  {
+    titol: "Llançament d'anelles",
+    etiqueta: 'Habilitat',
+    icona: 'i-anelles',
+    descripcio: 'Encerteu anelles en cons, pals i bitlles.',
+    punts: [
+      ['Cada objectiu té una puntuació diferent', 'Segons distància'],
+      ['Objectius més llunyans', 'Més punts']
+    ]
+  },
+  {
+    titol: 'Torre de gots',
+    etiqueta: 'Construcció',
+    icona: 'i-gots',
+    descripcio: 'Reproduïu figures amb gots de plàstic: piràmides, torres, escales…',
+    punts: [
+      ['Com més difícil és la figura', 'Més punts'],
+      ['Només compta si la figura queda estable', '—']
+    ]
+  }
+];
+
+/* Preferència de moviment reduït de l'usuari */
+const menysMoviment = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- 1. Logo amb alternativa ----------
+   Si img/logo-rocagrossa.png no existeix, es mostra un logo provisional. */
+document.querySelectorAll('.js-logo').forEach((img) => {
+  const posaAlternativa = () => { img.src = 'img/logo-placeholder.svg'; };
+  img.addEventListener('error', posaAlternativa, { once: true });
+  if (img.complete && img.naturalWidth === 0) posaAlternativa();
+});
+
+/* ---------- 2. Capçalera i menú mòbil ---------- */
+const capcalera = document.getElementById('capcalera');
+const botoMenu = document.querySelector('.nav-toggle');
+const menu = document.getElementById('menu-principal');
+
+function obreTancaMenu(obrir) {
+  botoMenu.setAttribute('aria-expanded', String(obrir));
+  botoMenu.querySelector('.visually-hidden').textContent = obrir ? 'Tanca el menú' : 'Obre el menú';
+  menu.classList.toggle('is-open', obrir);
+  capcalera.classList.toggle('is-open', obrir);
+}
+
+botoMenu.addEventListener('click', () => {
+  obreTancaMenu(botoMenu.getAttribute('aria-expanded') !== 'true');
+});
+
+// Tanca el menú en triar una secció
+menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => obreTancaMenu(false)));
+
+// Tanca el menú amb la tecla Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+    obreTancaMenu(false);
+    botoMenu.focus();
+  }
+});
+
+/* ---------- 3. Efectes en fer scroll (capçalera i botó "tornar a dalt") ---------- */
+const botoDalt = document.querySelector('.to-top');
+let esperantFrame = false;
+
+function enFerScroll() {
+  const y = window.scrollY;
+  capcalera.classList.toggle('is-scrolled', y > 20);
+  botoDalt.classList.toggle('is-visible', y > 600);
+  esperantFrame = false;
+}
+window.addEventListener('scroll', () => {
+  if (!esperantFrame) { esperantFrame = true; requestAnimationFrame(enFerScroll); }
+}, { passive: true });
+enFerScroll();
+
+/* Marca l'enllaç del menú de la secció visible */
+const enllacosMenu = [...menu.querySelectorAll('a')];
+const observadorSeccions = new IntersectionObserver((entrades) => {
+  entrades.forEach((entrada) => {
+    if (entrada.isIntersecting) {
+      enllacosMenu.forEach((a) => {
+        const actiu = a.getAttribute('href') === '#' + entrada.target.id;
+        a.classList.toggle('is-active', actiu);
+        if (actiu) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    }
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+enllacosMenu.forEach((a) => {
+  const seccio = document.querySelector(a.getAttribute('href'));
+  if (seccio) observadorSeccions.observe(seccio);
+});
+
+/* ---------- 4. Compte enrere ---------- */
+const objectiu = new Date(DATA_ACTIVITAT).getTime();
+const caselles = {
+  dies: document.querySelector('[data-cd="dies"]'),
+  hores: document.querySelector('[data-cd="hores"]'),
+  minuts: document.querySelector('[data-cd="minuts"]'),
+  segons: document.querySelector('[data-cd="segons"]')
+};
+const missatgeCompte = document.querySelector('.countdown__msg');
+const dosDigits = (n) => String(n).padStart(2, '0');
+let intervalCompte;
+
+function actualitzaCompte() {
+  const resta = objectiu - Date.now();
+
+  if (isNaN(objectiu) || resta <= 0) {
+    Object.values(caselles).forEach((c) => { c.textContent = '00'; });
+    missatgeCompte.hidden = false;
+    missatgeCompte.textContent = isNaN(objectiu)
+      ? 'Data per confirmar.'
+      : 'Ja hi som! Que comenci ROCADVENTUR!';
+    clearInterval(intervalCompte);
+    return;
+  }
+
+  const s = Math.floor(resta / 1000);
+  caselles.dies.textContent = Math.floor(s / 86400);
+  caselles.hores.textContent = dosDigits(Math.floor((s % 86400) / 3600));
+  caselles.minuts.textContent = dosDigits(Math.floor((s % 3600) / 60));
+  caselles.segons.textContent = dosDigits(s % 60);
+}
+actualitzaCompte();
+intervalCompte = setInterval(actualitzaCompte, 1000);
+
+/* ---------- 5. Targetes de les proves ---------- */
+const llista = document.getElementById('llista-proves');
+
+PROVES.forEach((prova, i) => {
+  const li = document.createElement('li');
+  li.className = 'reveal';
+  li.innerHTML = `
+    <button class="test-card" type="button" data-prova="${i}" aria-haspopup="dialog">
+      <span class="test-card__num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+      <span class="test-card__icon"><svg class="icon" aria-hidden="true"><use href="#${prova.icona}"/></svg></span>
+      <span class="test-card__title"><span class="visually-hidden">Prova ${i + 1}: </span>${prova.titol}</span>
+      <span class="test-card__tag">${prova.etiqueta}</span>
+      <span class="test-card__more" aria-hidden="true">Veure detalls →</span>
+    </button>`;
+  llista.appendChild(li);
+});
+
+/* ---------- 6. Modal de detall ---------- */
+const modal = document.getElementById('modal-prova');
+const modalEls = {
+  icona: document.getElementById('modal-icona'),
+  num: document.getElementById('modal-num'),
+  titol: document.getElementById('modal-titol'),
+  desc: document.getElementById('modal-desc'),
+  punts: document.getElementById('modal-punts')
+};
+let provaActual = 0;
+let elementOrigen = null;
+
+function ompleModal(i) {
+  provaActual = (i + PROVES.length) % PROVES.length; // fa la volta de 10 a 1
+  const p = PROVES[provaActual];
+  modalEls.icona.setAttribute('href', '#' + p.icona);
+  modalEls.num.textContent = `Prova ${provaActual + 1} de ${PROVES.length} · ${p.etiqueta}`;
+  modalEls.titol.textContent = p.titol;
+  modalEls.desc.textContent = p.descripcio;
+  modalEls.punts.innerHTML = '<ul>' + p.punts
+    .map(([text, pts]) => `<li><span>${text}</span><span class="pts">${pts}</span></li>`)
+    .join('') + '</ul>';
+}
+
+function obreModal(i) {
+  ompleModal(i);
+  elementOrigen = document.activeElement;
+  if (typeof modal.showModal === 'function') modal.showModal();
+  else modal.setAttribute('open', ''); // navegadors antics
+  document.body.style.overflow = 'hidden';
+}
+
+function tancaModal() {
+  if (typeof modal.close === 'function') modal.close();
+  else modal.removeAttribute('open');
+}
+
+modal.addEventListener('close', () => {
+  document.body.style.overflow = '';
+  if (elementOrigen) elementOrigen.focus(); // torna el focus a la targeta
+});
+
+llista.addEventListener('click', (e) => {
+  const boto = e.target.closest('[data-prova]');
+  if (boto) obreModal(Number(boto.dataset.prova));
+});
+
+modal.querySelector('.modal__close').addEventListener('click', tancaModal);
+
+// Clic fora de la caixa (al fons) tanca el modal
+modal.addEventListener('click', (e) => { if (e.target === modal) tancaModal(); });
+
+// Botons anterior / següent i fletxes del teclat
+modal.querySelectorAll('[data-modal-nav]').forEach((b) => {
+  b.addEventListener('click', () => ompleModal(provaActual + Number(b.dataset.modalNav)));
+});
+modal.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') ompleModal(provaActual + 1);
+  if (e.key === 'ArrowLeft') ompleModal(provaActual - 1);
+});
+
+/* ---------- 7. Esquema SVG de les 10 estacions ---------- */
+(function dibuixaEstacions() {
+  const svg = document.getElementById('esquema-estacions');
+  const ns = 'http://www.w3.org/2000/svg';
+  const cx = 200, cy = 200, r = 140;
+  const crea = (tag, attrs) => {
+    const el = document.createElementNS(ns, tag);
+    Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+    return el;
+  };
+
+  // Cercle de recorregut
+  svg.appendChild(crea('circle', { cx, cy, r, class: 'st-ring' }));
+
+  // Fletxa de sentit de rotació (arc interior)
+  const ra = 92;
+  const a1 = -Math.PI / 2 + 0.35, a2 = -Math.PI / 2 + 1.55;
+  const x1 = cx + ra * Math.cos(a1), y1 = cy + ra * Math.sin(a1);
+  const x2 = cx + ra * Math.cos(a2), y2 = cy + ra * Math.sin(a2);
+  svg.appendChild(crea('path', { d: `M${x1} ${y1} A${ra} ${ra} 0 0 1 ${x2} ${y2}`, class: 'st-arrow' }));
+  const t = a2 + Math.PI / 2; // direcció tangent al final de l'arc
+  const cap = (ang, len) => `${x2 + len * Math.cos(ang)},${y2 + len * Math.sin(ang)}`;
+  svg.appendChild(crea('polygon', {
+    points: `${cap(t, 9)} ${cap(t + 2.4, 9)} ${cap(t - 2.4, 9)}`,
+    class: 'st-arrow-head'
+  }));
+
+  // Punt de trobada central
+  svg.appendChild(crea('circle', { cx, cy, r: 46, class: 'st-center' }));
+  const txt1 = crea('text', { x: cx, y: cy - 3, class: 'st-center-txt' });
+  txt1.textContent = 'PUNT DE';
+  const txt2 = crea('text', { x: cx, y: cy + 14, class: 'st-center-txt' });
+  txt2.textContent = 'TROBADA';
+  svg.append(txt1, txt2);
+
+  // 10 estacions repartides en cercle (la 1 a dalt, sentit horari)
+  PROVES.forEach((p, i) => {
+    const ang = -Math.PI / 2 + (i * 2 * Math.PI) / PROVES.length;
+    const x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
+    const g = crea('g', {});
+    const tooltip = crea('title', {});
+    tooltip.textContent = `Estació ${i + 1}: ${p.titol}`;
+    g.appendChild(tooltip);
+    g.appendChild(crea('circle', { cx: x, cy: y, r: 24, class: 'st-dot' }));
+    const n = crea('text', { x, y: y + 1, class: 'st-num' });
+    n.textContent = i + 1;
+    g.appendChild(n);
+    svg.appendChild(g);
+  });
+})();
+
+/* ---------- 8. Aparicions en fer scroll i comptadors animats ---------- */
+function animaComptador(el) {
+  const final = Number(el.dataset.count);
+  if (menysMoviment) { el.textContent = final; return; }
+  const durada = 1200;
+  const inici = performance.now();
+  const pas = (ara) => {
+    const prog = Math.min((ara - inici) / durada, 1);
+    const suau = 1 - Math.pow(1 - prog, 3); // ease-out
+    el.textContent = Math.round(final * suau);
+    if (prog < 1) requestAnimationFrame(pas);
+  };
+  requestAnimationFrame(pas);
+}
+
+const observadorAparicions = new IntersectionObserver((entrades, obs) => {
+  entrades.forEach((entrada) => {
+    if (!entrada.isIntersecting) return;
+    entrada.target.classList.add('is-visible');
+    entrada.target.querySelectorAll('[data-count]').forEach(animaComptador);
+    obs.unobserve(entrada.target);
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  // Petit retard escalonat entre elements germans
+  el.style.transitionDelay = `${(i % 5) * 60}ms`;
+  observadorAparicions.observe(el);
+});
+
+/* ---------- 9. Neu al hero (decorativa i lleugera) ---------- */
+if (!menysMoviment) {
+  const capaNeu = document.querySelector('.hero__snow');
+  const quantitat = window.innerWidth < 600 ? 22 : 45;
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < quantitat; i++) {
+    const floc = document.createElement('span');
+    floc.className = 'flake';
+    floc.style.left = Math.random() * 100 + '%';
+    floc.style.setProperty('--s', (2 + Math.random() * 5).toFixed(1) + 'px');
+    floc.style.setProperty('--o', (0.3 + Math.random() * 0.6).toFixed(2));
+    floc.style.setProperty('--d', (9 + Math.random() * 12).toFixed(1) + 's');
+    floc.style.setProperty('--del', (-Math.random() * 20).toFixed(1) + 's');
+    floc.style.setProperty('--x', (Math.random() * 80 - 40).toFixed(0) + 'px');
+    fragment.appendChild(floc);
+  }
+  capaNeu.appendChild(fragment);
+}

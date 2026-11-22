@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROCADVENTUR · Gimcana d'hivern de l'Institut Rocagrossa</title>
+  <meta name="description" content="ROCADVENTUR: la gimcana esportiva d'hivern de l'Institut Rocagrossa. 10 proves, 70 minuts i un sol equip guanyador. Camp de futbol del Molí, Lloret de Mar.">
+  <meta name="theme-color" content="#0b2545">
+
+  <!-- Open Graph (com es veu l'enllaç quan es comparteix) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ca_ES">
+  <meta property="og:title" content="ROCADVENTUR · Gimcana d'hivern">
+  <meta property="og:description" content="10 proves. 70 minuts. Un sol equip guanyador. Organitzat per 2n A de l'Institut Rocagrossa.">
+  <meta property="og:image" content="img/logo-rocagrossa.png">
+
+  <!-- Favicon fet amb el logo de l'institut (amb alternativa SVG) -->
+  <link rel="icon" type="image/png" href="img/logo-rocagrossa.png">
+  <link rel="alternate icon" type="image/svg+xml" href="img/logo-placeholder.svg">
+  <link rel="apple-touch-icon" href="img/logo-rocagrossa.png">
+
+  <!-- Tipografies: Anton (títols) + Inter (text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Marca que hi ha JavaScript (per activar les animacions d'aparició sense parpelleig) -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- Enllaç per saltar directament al contingut (accessibilitat amb teclat) -->
+  <a class="skip-link" href="#contingut">Salta al contingut</a>
+
+  <!-- ============ SPRITE D'ICONES SVG ============ -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <!-- Proves -->
+    <symbol id="i-travesser" viewBox="0 0 48 48"><path d="M6 40V10h36v30"/><path d="M6 10l6 6h24l6-6M12 16v24M36 16v24"/><circle cx="24" cy="33" r="6"/><path d="M24 27v3l3 2M21 32l3-2"/></symbol>
+    <symbol id="i-globus" viewBox="0 0 48 48"><path d="M24 6c-8 0-13 6-13 13 0 9 8 15 13 15s13-6 13-15c0-7-5-13-13-13z"/><path d="M22 34l2 3 2-3M24 37c0 4-4 4-4 8"/><path d="M17 16c1-3 3-5 6-5"/></symbol>
+    <symbol id="i-aro" viewBox="0 0 48 48"><ellipse cx="24" cy="36" rx="17" ry="6"/><circle cx="24" cy="14" r="7"/><path d="M24 22v6M20 26l4 4 4-4"/></symbol>
+    <symbol id="i-cullera" viewBox="0 0 48 48"><ellipse cx="14" cy="30" rx="8" ry="6" transform="rotate(-30 14 30)"/><path d="M20 26l22-14"/><circle cx="13" cy="20" r="5"/></symbol>
+    <symbol id="i-basquet" viewBox="0 0 48 48"><path d="M8 6h32v18H8z"/><path d="M18 18h12"/><path d="M17 24l3 12M31 24l-3 12M17 24h14M19 30h10"/><circle cx="38" cy="38" r="6"/><path d="M32 38h12M38 32v12"/></symbol>
+    <symbol id="i-galleda" viewBox="0 0 48 48"><path d="M24 26l3 16h12l3-16z"/><path d="M24 26h18"/><ellipse cx="11" cy="12" rx="6" ry="7" transform="rotate(-25 11 12)"/><path d="M14 18l6 10"/><circle cx="32" cy="12" r="3"/></symbol>
+    <symbol id="i-nus" viewBox="0 0 48 48"><circle cx="17" cy="18" r="9"/><circle cx="31" cy="18" r="9"/><circle cx="24" cy="30" r="9"/></symbol>
+    <symbol id="i-arc" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="11"/><circle cx="24" cy="24" r="4"/><path d="M24 24L44 4M38 4h6v6"/></symbol>
+    <symbol id="i-anelles" viewBox="0 0 48 48"><path d="M16 42l8-30 8 30z"/><path d="M12 42h24"/><ellipse cx="24" cy="26" rx="10" ry="3.5"/><ellipse cx="24" cy="10" rx="8" ry="3"/></symbol>
+    <symbol id="i-gots" viewBox="0 0 48 48"><path d="M18 8h12l-2 10h-8z"/><path d="M11 22h12l-2 10h-8zM25 22h12l-2 10h-8z"/><path d="M4 36h12l-2 8H6zM18 36h12l-2 8h-8zM32 36h12l-2 8h-8z"/></symbol>
+    <!-- Normes i valors -->
+    <symbol id="i-respecte" viewBox="0 0 48 48"><path d="M24 40S7 30 7 18a8.5 8.5 0 0117-3 8.5 8.5 0 0117 3c0 12-17 22-17 22z"/></symbol>
+    <symbol id="i-zona" viewBox="0 0 48 48"><path d="M24 44s14-12 14-24a14 14 0 00-28 0c0 12 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></symbol>
+    <symbol id="i-xiulet" viewBox="0 0 48 48"><path d="M6 22h20l14-6v10a12 12 0 11-24 0"/><circle cx="28" cy="27" r="4"/><path d="M10 22V14h8"/></symbol>
+    <symbol id="i-equip" viewBox="0 0 48 48"><circle cx="16" cy="16" r="5"/><circle cx="32" cy="16" r="5"/><circle cx="24" cy="12" r="5"/><path d="M6 38c0-6 4-11 10-11M42 38c0-6-4-11-10-11M14 40c0-7 4-12 10-12s10 5 10 12"/></symbol>
+    <symbol id="i-jocnet" viewBox="0 0 48 48"><path d="M24 4l16 6v12c0 10-7 18-16 22-9-4-16-12-16-22V10z"/><path d="M16 24l6 6 10-12"/></symbol>
+    <symbol id="i-salut" viewBox="0 0 48 48"><rect x="6" y="12" width="36" height="28" rx="4"/><path d="M18 12V8h12v4M24 20v12M18 26h12"/></symbol>
+    <symbol id="i-aigua" viewBox="0 0 48 48"><path d="M24 4S10 20 10 30a14 14 0 0028 0C38 20 24 4 24 4z"/><path d="M17 31a7 7 0 007 7"/></symbol>
+    <symbol id="i-material" viewBox="0 0 48 48"><path d="M6 16l18-10 18 10v18L24 44 6 34z"/><path d="M6 16l18 10 18-10M24 26v18"/></symbol>
+    <!-- Què cal portar -->
+    <symbol id="i-samarreta" viewBox="0 0 48 48"><path d="M16 6l-12 8 5 8 5-3v23h20V19l5 3 5-8-12-8c-1 4-4 6-8 6s-7-2-8-6z"/></symbol>
+    <symbol id="i-abric" viewBox="0 0 48 48"><path d="M16 6h16l10 8v28H32V24M16 6L6 14v28h10V24"/><path d="M16 6l8 10 8-10M24 16v26M28 30h0M28 36h0"/><path d="M16 24h16"/></symbol>
+    <symbol id="i-ampolla" viewBox="0 0 48 48"><path d="M20 4h8v6h-8z"/><path d="M19 10h10l3 6v26a2 2 0 01-2 2H18a2 2 0 01-2-2V16z"/><path d="M16 24h16M16 34h16"/></symbol>
+    <symbol id="i-ganes" viewBox="0 0 48 48"><path d="M26 4L10 28h12l-2 16 18-26H26z"/></symbol>
+    <!-- Altres -->
+    <symbol id="i-calendari" viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="32" rx="4"/><path d="M6 20h36M16 6v8M32 6v8"/></symbol>
+    <symbol id="i-rellotge" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 14v10l7 5"/></symbol>
+    <symbol id="i-lloc" viewBox="0 0 48 48"><path d="M24 44s14-12 14-24a14 14 0 00-28 0c0 12 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></symbol>
+    <symbol id="i-fletxa-amunt" viewBox="0 0 48 48"><path d="M24 40V8M10 22L24 8l14 14"/></symbol>
+    <symbol id="i-creu" viewBox="0 0 48 48"><path d="M12 12l24 24M36 12L12 36"/></symbol>
+    <symbol id="i-mes" viewBox="0 0 48 48"><path d="M24 10v28M10 24h28"/></symbol>
+    <symbol id="i-floc" viewBox="0 0 48 48"><path d="M24 4v40M6.7 14l34.6 20M6.7 34l34.6-20"/><path d="M18 8l6 5 6-5M18 40l6-5 6 5"/></symbol>
+  </svg>
+
+  <!-- ============ CAPÇALERA I MENÚ FIX ============ -->
+  <header class="header" id="capcalera">
+    <div class="container header__inner">
+      <a class="brand" href="#inici" aria-label="ROCADVENTUR, torna a l'inici">
+        <img class="brand__logo js-logo" src="img/logo-rocagrossa.png" alt="Logo de l'Institut Rocagrossa" width="40" height="40">
+        <span class="brand__name">ROCADVENTUR</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="visually-hidden">Obre el menú</span>
+      </button>
+
+      <nav class="nav" id="menu-principal" aria-label="Menú principal">
+        <ul class="nav__list">
+          <li><a href="#que-es">Què és</a></li>
+          <li><a href="#com-funciona">Com funciona</a></li>
+          <li><a href="#proves">Proves</a></li>
+          <li><a href="#horari">Horari</a></li>
+          <li><a href="#on">On</a></li>
+          <li><a href="#normes">Normes</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contingut">
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero" id="inici" aria-labelledby="hero-titol">
+      <div class="hero__snow" aria-hidden="true"></div>
+      <svg class="hero__mountains" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+        <path class="m-back" d="M0 320V190l140-90 120 70 180-140 160 120 130-80 200 150 140-90 170 110 200-130v310z"/>
+        <path class="m-front" d="M0 320V250l200-80 150 60 220-110 180 120 160-70 190 90 180-60 160 50v150z"/>
+      </svg>
+
+      <div class="container hero__content">
+        <p class="hero__tag">Gimcana esportiva d'hivern · Institut Rocagrossa</p>
+
+        <h1 class="hero__title" id="hero-titol">
+          <span class="hero__title-main" data-text="ROCADVENTUR">ROCADVENTUR</span>
+        </h1>
+
+        <p class="hero__subtitle">10 proves. 70 minuts. <strong>Un sol equip guanyador.</strong></p>
+
+        <ul class="hero__info">
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#i-calendari"/></svg>
+            <!-- [PER CONFIRMAR] Canvia aquest text quan hi hagi data definitiva -->
+            <span class="pending">[DATA PER CONFIRMAR]</span>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#i-rellotge"/></svg>
+            <span>9:00 – 11:00 h</span>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#i-lloc"/></svg>
+            <span>Camp de futbol del Molí, Lloret de Mar</span>
+          </li>
+        </ul>
+
+        <!-- Compte enrere: la data es configura a js/main.js (DATA_ACTIVITAT) -->
+        <div class="countdown" role="timer" aria-label="Compte enrere fins a ROCADVENTUR">
+          <div class="countdown__item"><span class="countdown__num" data-cd="dies">--</span><span class="countdown__label">dies</span></div>
+          <div class="countdown__item"><span class="countdown__num" data-cd="hores">--</span><span class="countdown__label">hores</span></div>
+          <div class="countdown__item"><span class="countdown__num" data-cd="minuts">--</span><span class="countdown__label">minuts</span></div>
+          <div class="countdown__item"><span class="countdown__num" data-cd="segons">--</span><span class="countdown__label">segons</span></div>
+        </div>
+        <p class="countdown__msg" aria-live="polite" hidden></p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#proves">Descobreix les proves</a>
+          <a class="btn btn--ghost" href="#com-funciona">Com funciona</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. QUÈ ÉS ============ -->
+    <section class="section" id="que-es" aria-labelledby="que-es-titol">
+      <div class="container">
+        <div class="intro reveal">
+          <p class="eyebrow">Què és</p>
+          <h2 class="section__title" id="que-es-titol">Mou-te. Coopera. Suma punts.</h2>
+          <p class="lead">
+            ROCADVENTUR és una gimcana esportiva per equips amb <strong>10 estacions diferents</strong>,
+            pensada per moure's, cooperar i passar-ho bé. No hi ha enfrontaments directes:
+            cada equip suma punts a cada prova i <strong>guanya qui n'acumula més</strong>.
+          </p>
+        </div>
+
+        <ul class="stats">
+          <li class="stat reveal"><span class="stat__num" data-count="10">10</span><span class="stat__label">proves</span></li>
+          <li class="stat reveal"><span class="stat__num" data-count="10">10</span><span class="stat__label">equips</span></li>
+          <li class="stat reveal"><span class="stat__num"><span data-count="5">5</span>-<span data-count="6">6</span></span><span class="stat__label">participants per equip</span></li>
+          <li class="stat reveal"><span class="stat__num"><span data-count="70">70</span><small>min</small></span><span class="stat__label">de joc</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 3. COM FUNCIONA ============ -->
+    <section class="section section--ice" id="com-funciona" aria-labelledby="com-funciona-titol">
+      <div class="container">
+        <p class="eyebrow reveal">Com funciona</p>
+        <h2 class="section__title reveal" id="com-funciona-titol">Les regles del joc</h2>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3 class="step__title">Equips de 5-6</h3>
+            <p>Es fan 10 equips mixtos i equilibrats. Cada equip porta un peto d'un color.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3 class="step__title">Rotació 1 → 10</h3>
+            <p>Cada equip comença en una estació diferent i va rotant en ordre, de l'1 al 10.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3 class="step__title">6 min + 1 min</h3>
+            <p>Cada prova dura 6 minuts i hi ha 1 minut per canviar d'estació. El xiulet avisa dels canvis.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">04</span>
+            <h3 class="step__title">Una oportunitat</h3>
+            <p>Cada equip té una sola oportunitat per prova. Feu-la comptar.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">05</span>
+            <h3 class="step__title">Suma de punts</h3>
+            <p>Cada prova té el seu propi sistema de puntuació. Al final se sumen tots els punts.</p>
+          </li>
+          <li class="step step--win reveal">
+            <span class="step__num" aria-hidden="true">06</span>
+            <h3 class="step__title">Guanya qui més suma</h3>
+            <p><strong>L'equip amb més punts guanya ROCADVENTUR.</strong></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 4. LES 10 PROVES ============ -->
+    <section class="section section--dark" id="proves" aria-labelledby="proves-titol">
+      <div class="container">
+        <p class="eyebrow eyebrow--light reveal">Les proves</p>
+        <h2 class="section__title reveal" id="proves-titol">10 estacions. 10 reptes.</h2>
+        <p class="section__intro reveal">Toca una prova per veure com es juga i com es puntua.</p>
+
+        <!-- Les targetes es generen des de js/main.js (llista PROVES) -->
+        <ul class="tests" id="llista-proves"></ul>
+      </div>
+    </section>
+
+    <!-- Finestra modal de detall de prova -->
+    <dialog class="modal" id="modal-prova" aria-labelledby="modal-titol">
+      <div class="modal__box">
+        <button class="modal__close" type="button" aria-label="Tanca">
+          <svg class="icon" aria-hidden="true"><use href="#i-creu"/></svg>
+        </button>
+        <div class="modal__head">
+          <span class="modal__icon"><svg class="icon" aria-hidden="true"><use id="modal-icona" href="#i-travesser"/></svg></span>
+          <div>
+            <p class="modal__num" id="modal-num">Prova 1</p>
+            <h3 class="modal__title" id="modal-titol">Prova</h3>
+          </div>
+        </div>
+        <p class="modal__desc" id="modal-desc"></p>
+        <div class="modal__score">
+          <h4>Com es puntua</h4>
+          <div id="modal-punts"></div>
+        </div>
+        <div class="modal__nav">
+          <button class="btn btn--small btn--ghost-dark" type="button" data-modal-nav="-1">← Anterior</button>
+          <button class="btn btn--small btn--primary" type="button" data-modal-nav="1">Següent →</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- ============ 5. HORARI ============ -->
+    <section class="section" id="horari" aria-labelledby="horari-titol">
+      <div class="container">
+        <p class="eyebrow reveal">Horari del dia</p>
+        <h2 class="section__title reveal" id="horari-titol">Un matí a tota màquina</h2>
+
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <time class="timeline__time">9:00</time>
+            <p>Sortida de l'institut i desplaçament a peu</p>
+          </li>
+          <li class="timeline__item reveal">
+            <time class="timeline__time">9:15</time>
+            <p>Arribada, formació d'equips i explicació de les normes</p>
+          </li>
+          <li class="timeline__item reveal">
+            <time class="timeline__time">9:25</time>
+            <p>Escalfament conjunt</p>
+          </li>
+          <li class="timeline__item timeline__item--key reveal">
+            <time class="timeline__time">9:30</time>
+            <p><strong>Comença la gimcana:</strong> 10 estacions</p>
+          </li>
+          <li class="timeline__item reveal">
+            <time class="timeline__time">10:40</time>
+            <p>Hidratació, recollida de material i recompte de punts</p>
+          </li>
+          <li class="timeline__item reveal">
+            <time class="timeline__time">10:50</time>
+            <p>Tornada a l'Institut Rocagrossa</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 6. ON ES FA ============ -->
+    <section class="section section--ice" id="on" aria-labelledby="on-titol">
+      <div class="container">
+        <p class="eyebrow reveal">On es fa</p>
+        <h2 class="section__title reveal" id="on-titol">Zona del Molí, Lloret de Mar</h2>
+
+        <div class="place">
+          <div class="place__info reveal">
+            <ul class="place__list">
+              <li><strong>Camp de futbol del Molí</strong> i la pista de bàsquet del Molí.</li>
+              <li><strong>Si plou:</strong> ens traslladem al pavelló del Molí.</li>
+              <li><strong>Hi anirem a peu</strong> des de l'Institut Rocagrossa.</li>
+            </ul>
+            <div class="map">
+              <iframe
+                title="Mapa del Camp de futbol del Molí a Lloret de Mar"
+                src="https://www.google.com/maps?q=Camp%20de%20futbol%20del%20Mol%C3%AD%2C%20Lloret%20de%20Mar&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <figure class="stations reveal">
+            <!-- Esquema generat des de js/main.js: 10 estacions en cercle -->
+            <svg class="stations__svg" id="esquema-estacions" viewBox="0 0 400 400" role="img" aria-labelledby="esquema-titol esquema-desc">
+              <title id="esquema-titol">Esquema de les 10 estacions</title>
+              <desc id="esquema-desc">Les 10 estacions estan col·locades en cercle al voltant del punt de trobada central, numerades de l'1 al 10 en el sentit de les agulles del rellotge.</desc>
+            </svg>
+            <figcaption>Les 10 estacions en cercle al voltant del punt de trobada. Els equips giren en el sentit de la fletxa.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. NORMES I VALORS ============ -->
+    <section class="section" id="normes" aria-labelledby="normes-titol">
+      <div class="container">
+        <p class="eyebrow reveal">Normes i valors</p>
+        <h2 class="section__title reveal" id="normes-titol">Juga net, juga en equip</h2>
+
+        <ul class="rules">
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-respecte"/></svg><p>Respecta els companys, els monitors i el material.</p></li>
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-zona"/></svg><p>No surtis de la zona de la gimcana sense permís.</p></li>
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-xiulet"/></svg><p>Espera el xiulet per començar i per canviar d'estació.</p></li>
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-equip"/></svg><p>Tot l'equip participa a cada prova. Ningú es queda fora.</p></li>
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-jocnet"/></svg><p>Joc net: res de trampes ni empentes.</p></li>
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-salut"/></svg><p>Avisa un monitor si algú es fa mal o no es troba bé.</p></li>
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-aigua"/></svg><p>Beu aigua a la zona d'hidratació.</p></li>
+          <li class="rule reveal"><svg class="icon" aria-hidden="true"><use href="#i-material"/></svg><p>Deixa el material com l'has trobat.</p></li>
+        </ul>
+
+        <aside class="inclusion reveal" aria-label="Inclusió">
+          <p class="inclusion__quote">«Aquí compta més la cooperació i l'esforç que guanyar.»</p>
+          <p>Les proves s'adapten perquè tothom hi pugui participar: menys distància, material més tou o més temps.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 8. QUÈ CAL PORTAR ============ -->
+    <section class="section section--dark section--compact" id="portar" aria-labelledby="portar-titol">
+      <div class="container">
+        <p class="eyebrow eyebrow--light reveal">Què cal portar</p>
+        <h2 class="section__title reveal" id="portar-titol">La teva motxilla</h2>
+        <ul class="kit">
+          <li class="kit__item reveal"><svg class="icon" aria-hidden="true"><use href="#i-samarreta"/></svg><span>Roba i calçat esportius</span></li>
+          <li class="kit__item reveal"><svg class="icon" aria-hidden="true"><use href="#i-abric"/></svg><span>Roba d'abric (és hivern!)</span></li>
+          <li class="kit__item reveal"><svg class="icon" aria-hidden="true"><use href="#i-ampolla"/></svg><span>Ampolla d'aigua</span></li>
+          <li class="kit__item reveal"><svg class="icon" aria-hidden="true"><use href="#i-ganes"/></svg><span>Ganes de jugar</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 9. PREGUNTES FREQÜENTS ============ -->
+    <section class="section" id="faq" aria-labelledby="faq-titol">
+      <div class="container container--narrow">
+        <p class="eyebrow reveal">Preguntes freqüents</p>
+        <h2 class="section__title reveal" id="faq-titol">Dubtes? Aquí els tens</h2>
+
+        <div class="faq reveal">
+          <details class="faq__item">
+            <summary>Què passa si plou?<svg class="icon" aria-hidden="true"><use href="#i-mes"/></svg></summary>
+            <p>Ens traslladem al pavelló del Molí. La gimcana es fa igualment.</p>
+          </details>
+          <details class="faq__item">
+            <summary>He d'anar bé en esports?<svg class="icon" aria-hidden="true"><use href="#i-mes"/></svg></summary>
+            <p>No. Els equips són equilibrats i es valora l'esforç.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Qui ens vigila?<svg class="icon" aria-hidden="true"><use href="#i-mes"/></svg></summary>
+            <p>A cada estació hi ha alumnes de 2n de monitors i també hi ha professorat responsable.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Hi ha premi?<svg class="icon" aria-hidden="true"><use href="#i-mes"/></svg></summary>
+            <p>Sí, per a l'equip que sumi més punts. <span class="pending">[CONCRETAR PREMI]</span></p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ 10. PEU DE PÀGINA ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img class="footer__logo js-logo" src="img/logo-rocagrossa.png" alt="Logo de l'Institut Rocagrossa" width="64" height="64" loading="lazy">
+        <div>
+          <p class="footer__title">ROCADVENTUR</p>
+          <p>Organitzat per 2n A – Projecte Intermodular (MP1713)</p>
+          <p>Institut Rocagrossa · Lloret de Mar</p>
+        </div>
+      </div>
+      <div class="footer__team">
+        <p class="footer__label">Equip organitzador</p>
+        <ul>
+          <li>Dani Medina</li>
+          <li>Joel Riuró</li>
+          <li>Guillem Morón</li>
+          <li>Pol Cufí</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <!-- [PER CONFIRMAR] Revisa el curs escolar -->
+      <p>© Curs 2026-2027 · Institut Rocagrossa</p>
+      <a href="#inici">Torna a dalt ↑</a>
+    </div>
+  </footer>
+
+  <!-- Botó flotant per tornar a dalt -->
+  <a class="to-top" href="#inici" aria-label="Torna a dalt">
+    <svg class="icon" aria-hidden="true"><use href="#i-fletxa-amunt"/></svg>
+  </a>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
