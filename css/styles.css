@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ROCADVENTUR · Estils
+   ROCADVENTURE · Estils
    Mobile-first: els estils base són per a mòbil i s'amplien amb media queries.
    ========================================================================== */
 
@@ -181,12 +181,12 @@ h1, h2, h3, h4 { line-height: 1.1; }
   background: rgba(142, 202, 230, .12); color: #d9eef8; margin-bottom: 22px;
 }
 
-/* Tractament de logotip per a ROCADVENTUR */
+/* Tractament de logotip per a ROCADVENTURE */
 .hero__title { margin-bottom: 18px; }
 .hero__title-main {
   position: relative; display: inline-block;
   font-family: var(--f-display); font-weight: 400; line-height: .9;
-  font-size: clamp(3.1rem, 15.5vw, 10rem); letter-spacing: .01em;
+  font-size: clamp(2.6rem, 14vw, 10rem); letter-spacing: .01em;
   background: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #bfe3f4 70%, #8ecae6 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   transform: skewX(-6deg);

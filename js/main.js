@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ROCADVENTUR · JavaScript (vanilla, sense dependències)
+   ROCADVENTURE · JavaScript (vanilla, sense dependències)
    ========================================================================== */
 
 /* ---------- CONFIGURACIÓ ----------
@@ -213,7 +213,7 @@ function actualitzaCompte() {
     missatgeCompte.hidden = false;
     missatgeCompte.textContent = isNaN(objectiu)
       ? 'Data no vàlida a DATA_ACTIVITAT.'
-      : 'Ja hi som! Que comenci ROCADVENTUR!';
+      : 'Ja hi som! Que comenci ROCADVENTURE!';
     clearInterval(intervalCompte);
     return;
   }

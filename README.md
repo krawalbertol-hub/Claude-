@@ -1,4 +1,4 @@
-# ROCADVENTUR · Web promocional
+# ROCADVENTURE · Web promocional
 
 Web estàtica (HTML + CSS + JS vanilla) de la gimcana d'hivern de l'Institut Rocagrossa.
 Organitzat per 2n A – Projecte Intermodular (MP1713).
