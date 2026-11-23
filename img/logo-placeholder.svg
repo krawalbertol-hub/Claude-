@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Institut Rocagrossa">
-  <!-- Logo provisional: es fa servir només si falta img/logo-rocagrossa.png -->
-  <rect width="64" height="64" rx="14" fill="#0b2545"/>
-  <path d="M10 46 L26 22 L34 33 L40 26 L54 46 Z" fill="#8ecae6"/>
-  <path d="M26 22 L30 28 L27 30 L23 27 Z M40 26 L43 30 L40 32 L38 29 Z" fill="#ffffff"/>
-  <text x="32" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="9" fill="#ffffff">ROCAGROSSA</text>
-</svg>

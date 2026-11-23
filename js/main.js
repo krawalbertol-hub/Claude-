@@ -3,9 +3,11 @@
    ========================================================================== */
 
 /* ---------- CONFIGURACIÓ ----------
-   [PER CONFIRMAR] Data i hora d'inici de l'activitat (format AAAA-MM-DDTHH:MM:SS, hora local).
-   Quan tingueu la data definitiva, canvieu-la aquí i també el text del hero a index.html. */
-const DATA_ACTIVITAT = '2027-02-12T09:00:00';
+   Data i hora d'inici de l'activitat: dilluns 21 de desembre de 2026 a les 9:00.
+   S'indica amb la zona horària (+01:00, hora d'hivern a Catalunya) perquè el compte
+   enrere sigui correcte encara que el dispositiu tingui una altra zona configurada.
+   Si canvia la data, actualitzeu-la aquí i també al hero d'index.html. */
+const DATA_ACTIVITAT = '2026-12-21T09:00:00+01:00';
 
 /* Llista de les 10 proves. Cada prova té:
    - titol, etiqueta (subtítol curt), icona (id del sprite SVG)
@@ -120,14 +122,6 @@ const PROVES = [
 /* Preferència de moviment reduït de l'usuari */
 const menysMoviment = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- 1. Logo amb alternativa ----------
-   Si img/logo-rocagrossa.png no existeix, es mostra un logo provisional. */
-document.querySelectorAll('.js-logo').forEach((img) => {
-  const posaAlternativa = () => { img.src = 'img/logo-placeholder.svg'; };
-  img.addEventListener('error', posaAlternativa, { once: true });
-  if (img.complete && img.naturalWidth === 0) posaAlternativa();
-});
-
 /* ---------- 2. Capçalera i menú mòbil ---------- */
 const capcalera = document.getElementById('capcalera');
 const botoMenu = document.querySelector('.nav-toggle');
@@ -207,7 +201,7 @@ function actualitzaCompte() {
     Object.values(caselles).forEach((c) => { c.textContent = '00'; });
     missatgeCompte.hidden = false;
     missatgeCompte.textContent = isNaN(objectiu)
-      ? 'Data per confirmar.'
+      ? 'Data no vàlida a DATA_ACTIVITAT.'
       : 'Ja hi som! Que comenci ROCADVENTUR!';
     clearInterval(intervalCompte);
     return;

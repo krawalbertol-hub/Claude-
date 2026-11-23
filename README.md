@@ -7,10 +7,10 @@ Organitzat per 2n A – Projecte Intermodular (MP1713).
 - `index.html` – pàgina única
 - `css/styles.css` – estils (paleta a les variables `:root`)
 - `js/main.js` – compte enrere (`DATA_ACTIVITAT`), proves (`PROVES`), modal, animacions
-- `img/` – **cal afegir-hi `logo-rocagrossa.png`** (mentre no hi sigui, es mostra `logo-placeholder.svg`)
+- `img/` – logos de l'institut (original i versions blanques transparents)
 
 ## Pendents
-Cerca `[PER CONFIRMAR]`, `[DATA PER CONFIRMAR]` i `[CONCRETAR PREMI]` a tot el projecte.
+Cerca `[PER CONFIRMAR]` i `[CONCRETAR PREMI]` a tot el projecte.
 
 ## Obrir en local
 Doble clic a `index.html`, o bé: `python3 -m http.server 8000` i obre http://localhost:8000

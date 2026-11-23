@@ -4,8 +4,8 @@
    ========================================================================== */
 
 /* ---------- 1. Variables (paleta i mides) ----------
-   [PER CONFIRMAR] Ajusta --c-marca i --c-marca-2 als colors exactes del logo
-   de l'Institut Rocagrossa (img/logo-rocagrossa.png). */
+   El logo de l'Institut Rocagrossa és en blanc i negre: el fem servir en blanc
+   sobre el blau fosc de la marca, amb el blau gel i el taronja com a accents. */
 :root {
   --c-marca: #0b2545;        /* blau fosc institucional */
   --c-marca-2: #13315c;      /* blau intermedi */
@@ -131,7 +131,8 @@ h1, h2, h3, h4 { line-height: 1.1; }
 .header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand__logo { width: 40px; height: 40px; object-fit: contain; background: var(--c-blanc); border-radius: 10px; padding: 3px; }
+.brand__logo { width: 38px; height: 38px; object-fit: contain; }
+.brand { gap: 12px; }
 .brand__name { font-family: var(--f-display); font-size: 1.35rem; letter-spacing: .04em; }
 
 .nav-toggle {
@@ -173,6 +174,7 @@ h1, h2, h3, h4 { line-height: 1.1; }
     linear-gradient(170deg, #0b2545 0%, #13315c 55%, #1d4e89 100%);
 }
 .hero__content { position: relative; z-index: 2; text-align: center; }
+.hero__logo { width: 190px; height: auto; margin: 0 auto 18px; opacity: .95; }
 .hero__tag {
   display: inline-block; font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
   padding: 8px 14px; border: 1px solid rgba(142, 202, 230, .5); border-radius: 999px;
@@ -402,8 +404,9 @@ h1, h2, h3, h4 { line-height: 1.1; }
 /* ---------- 16. Peu de pàgina ---------- */
 .footer { background: #071a31; color: #cfe3f1; padding-top: 48px; }
 .footer__inner { display: grid; gap: 28px; padding-bottom: 32px; }
-.footer__brand { display: flex; gap: 16px; align-items: center; }
-.footer__logo { width: 64px; height: 64px; object-fit: contain; background: var(--c-blanc); border-radius: 14px; padding: 6px; }
+.footer__brand { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.footer__logo { width: 220px; height: auto; }
+.footer__text { border-left: 1px solid rgba(255,255,255,.2); padding-left: 16px; }
 .footer__title { font-family: var(--f-display); font-size: 1.8rem; color: var(--c-blanc); letter-spacing: .03em; line-height: 1.1; }
 .footer__label { font-weight: 800; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--c-gel); margin-bottom: 8px; }
 .footer__team ul { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -460,7 +463,9 @@ h1, h2, h3, h4 { line-height: 1.1; }
   .nav__list { display: flex; gap: 4px; }
   .nav__list a { border: 0; padding: 8px 12px; font-size: .95rem; border-radius: 999px; }
   .nav__list a:hover, .nav__list a.is-active { background: rgba(255,255,255,.1); }
-  .brand__logo { width: 46px; height: 46px; }
+  .brand__logo { width: 44px; height: 44px; }
+  .hero__logo { width: 230px; }
+  .footer__brand { flex-direction: row; align-items: center; gap: 24px; }
 
   /* Timeline horitzontal en escriptori */
   .timeline { grid-template-columns: repeat(6, minmax(0, 1fr)); padding-left: 0; padding-top: 34px; gap: 14px; }
