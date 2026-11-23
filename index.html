@@ -288,31 +288,42 @@
         <p class="eyebrow reveal">On es fa</p>
         <h2 class="section__title reveal" id="on-titol">Zona del Molí, Lloret de Mar</h2>
 
+        <p class="section__intro section__intro--dark reveal">Totes les estacions són al Camp de futbol del Molí i al voltant del pavelló. Toca un número per veure la prova.</p>
+
+        <!-- Mapa aeri amb les 10 estacions. Els marcadors es creen des de js/main.js
+             (camp "pos" de cada prova a la llista PROVES: posició en % sobre la imatge) -->
         <div class="place">
+          <figure class="aerial reveal">
+            <div class="aerial__map" id="mapa-estacions">
+              <img src="img/mapa-estacions.jpg" width="555" height="557" loading="lazy"
+                   alt="Vista aèria del Camp de futbol del Molí i del pavelló del Molí, a Lloret de Mar, amb les 10 estacions de la gimcana marcades amb números.">
+            </div>
+            <figcaption>Vista aèria de la zona del Molí. Estacions 1, 2, 3, 4, 6, 7, 8 i 10: camp de futbol. Estacions 5 i 9: zona del pavelló.</figcaption>
+          </figure>
+
+          <div class="place__side reveal">
+            <h3 class="place__subtitle">Les 10 estacions</h3>
+            <ol class="legend" id="llegenda-estacions"></ol>
+          </div>
+        </div>
+
+        <div class="place place--info">
           <div class="place__info reveal">
+            <h3 class="place__subtitle">Com arribar-hi</h3>
             <ul class="place__list">
               <li><strong>Camp de futbol del Molí</strong> i la pista de bàsquet del Molí.</li>
               <li><strong>Si plou:</strong> ens traslladem al pavelló del Molí.</li>
               <li><strong>Hi anirem a peu</strong> des de l'Institut Rocagrossa.</li>
             </ul>
-            <div class="map">
-              <iframe
-                title="Mapa del Camp de futbol del Molí a Lloret de Mar"
-                src="https://www.google.com/maps?q=Camp%20de%20futbol%20del%20Mol%C3%AD%2C%20Lloret%20de%20Mar&output=embed"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                allowfullscreen></iframe>
-            </div>
           </div>
-
-          <figure class="stations reveal">
-            <!-- Esquema generat des de js/main.js: 10 estacions en cercle -->
-            <svg class="stations__svg" id="esquema-estacions" viewBox="0 0 400 400" role="img" aria-labelledby="esquema-titol esquema-desc">
-              <title id="esquema-titol">Esquema de les 10 estacions</title>
-              <desc id="esquema-desc">Les 10 estacions estan col·locades en cercle al voltant del punt de trobada central, numerades de l'1 al 10 en el sentit de les agulles del rellotge.</desc>
-            </svg>
-            <figcaption>Les 10 estacions en cercle al voltant del punt de trobada. Els equips giren en el sentit de la fletxa.</figcaption>
-          </figure>
+          <div class="map reveal">
+            <iframe
+              title="Mapa del Camp de futbol del Molí a Lloret de Mar"
+              src="https://www.google.com/maps?q=Camp%20de%20futbol%20del%20Mol%C3%AD%2C%20Lloret%20de%20Mar&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </section>

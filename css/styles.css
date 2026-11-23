@@ -344,18 +344,59 @@ h1, h2, h3, h4 { line-height: 1.1; }
 .map { border-radius: var(--radi); overflow: hidden; box-shadow: var(--ombra); aspect-ratio: 4 / 3; background: var(--c-vora); }
 .map iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-.stations { background: var(--c-blanc); border-radius: var(--radi-gran); padding: 18px; box-shadow: var(--ombra); }
-.stations__svg { width: 100%; height: auto; max-width: 440px; margin-inline: auto; }
-.stations figcaption { text-align: center; font-size: .9rem; color: var(--c-text-suau); margin-top: 10px; }
-/* Estils dels elements de l'esquema (creats amb JS) */
-.st-ring { fill: none; stroke: var(--c-vora); stroke-width: 2; stroke-dasharray: 6 8; }
-.st-arrow { fill: none; stroke: var(--c-energia); stroke-width: 3; stroke-linecap: round; }
-.st-arrow-head { fill: var(--c-energia); }
-.st-center { fill: var(--c-marca); }
-.st-center-txt { fill: #fff; font: 700 13px var(--f-text); text-anchor: middle; }
-.st-dot { fill: var(--c-gel); stroke: var(--c-marca); stroke-width: 3; }
-.st-num { fill: var(--c-marca); font: 400 24px var(--f-display); text-anchor: middle; dominant-baseline: central; }
-.st-label { fill: var(--c-text-suau); font: 600 11px var(--f-text); text-anchor: middle; }
+.place--info { margin-top: 24px; }
+.place__subtitle { font-size: 1.15rem; font-weight: 800; color: var(--c-marca); margin-bottom: 14px; }
+.section__intro--dark { color: var(--c-text-suau); }
+
+/* Mapa aeri amb marcadors numerats */
+.aerial { background: var(--c-blanc); border-radius: var(--radi-gran); padding: 10px; box-shadow: var(--ombra); }
+.aerial__map { position: relative; border-radius: calc(var(--radi-gran) - 8px); overflow: hidden; }
+.aerial__map img { width: 100%; height: auto; display: block; }
+/* Vel fosc suau perquè els números ressaltin */
+.aerial__map::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 37, 69, .15), rgba(11, 37, 69, .3));
+}
+.aerial figcaption { font-size: .88rem; color: var(--c-text-suau); padding: 10px 6px 4px; }
+
+.pin {
+  position: absolute; z-index: 2; transform: translate(-50%, -50%);
+  width: clamp(30px, 8vw, 48px); height: clamp(30px, 8vw, 48px); border-radius: 50%;
+  display: grid; place-items: center; padding: 0;
+  background: var(--c-energia); color: var(--c-marca); border: 3px solid var(--c-blanc);
+  font-family: var(--f-display); font-size: clamp(1rem, 4.2vw, 1.55rem); line-height: 1;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .45);
+  transition: transform .2s, background-color .2s, color .2s;
+}
+.pin span { transform: translateY(1px); }
+/* Ona que s'expandeix al voltant de cada marcador */
+.pin::before {
+  content: ""; position: absolute; inset: -3px; border-radius: 50%;
+  border: 3px solid var(--c-energia); opacity: 0;
+  animation: ona 2.6s ease-out var(--retard, 0s) infinite;
+}
+@keyframes ona {
+  0% { transform: scale(1); opacity: .9; }
+  70%, 100% { transform: scale(1.9); opacity: 0; }
+}
+.pin:hover, .pin:focus-visible, .pin.is-hot {
+  transform: translate(-50%, -50%) scale(1.18); background: var(--c-marca); color: var(--c-blanc); z-index: 3;
+}
+
+/* Llegenda de les estacions */
+.legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.legend__item {
+  width: 100%; height: 100%; display: flex; align-items: center; gap: 10px; text-align: left;
+  background: var(--c-blanc); border: 1px solid var(--c-vora); border-radius: 12px; padding: 8px 10px;
+  color: var(--c-text); font-weight: 700; font-size: .9rem; line-height: 1.2;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.legend__item:hover, .legend__item.is-hot { border-color: var(--c-energia); transform: translateX(3px); box-shadow: var(--ombra); }
+.legend__num {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--c-marca); color: var(--c-blanc); font-family: var(--f-display); font-size: 1.05rem;
+}
+.legend__item.is-hot .legend__num, .legend__item:hover .legend__num { background: var(--c-energia); color: var(--c-marca); }
 
 /* ---------- 13. Normes ---------- */
 .rules { display: grid; gap: 12px; }
@@ -453,7 +494,9 @@ h1, h2, h3, h4 { line-height: 1.1; }
   .tests { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
   .rules { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .rule { flex-direction: column; align-items: flex-start; padding: 20px; }
-  .place { grid-template-columns: 1.1fr 1fr; align-items: start; gap: 32px; }
+  .place { grid-template-columns: 1.25fr 1fr; align-items: center; gap: 32px; }
+  .place--info { grid-template-columns: 1fr 1.25fr; margin-top: 40px; }
+  .legend { grid-template-columns: 1fr; }
   .footer__inner { grid-template-columns: 1.4fr 1fr; align-items: center; }
   .hero__mountains { height: 220px; }
 

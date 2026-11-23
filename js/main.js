@@ -11,12 +11,14 @@ const DATA_ACTIVITAT = '2026-12-21T09:00:00+01:00';
 
 /* Llista de les 10 proves. Cada prova té:
    - titol, etiqueta (subtítol curt), icona (id del sprite SVG)
+   - pos: posició al mapa aeri [x, y] en % (esquerra, dalt) sobre img/mapa-estacions.jpg
    - descripcio i punts (llista de regles de puntuació: [text, punts]) */
 const PROVES = [
   {
     titol: 'Crossbar Challenge',
     etiqueta: 'Futbol',
     icona: 'i-travesser',
+    pos: [34.3, 27.6],
     descripcio: 'Xuts per torns per tocar el travesser de la porteria. Precisió i sang freda.',
     punts: [
       ['Cada toc al travesser', '1 punt'],
@@ -27,6 +29,7 @@ const PROVES = [
     titol: 'Globus volador',
     etiqueta: 'Coordinació',
     icona: 'i-globus',
+    pos: [54.2, 39.7],
     descripcio: 'Porteu un globus del punt A al punt B sense que toqui a terra. Ningú no el pot tocar dues vegades seguides.',
     punts: [
       ['Arribar al punt B sense que caigui', 'Punts base'],
@@ -37,6 +40,7 @@ const PROVES = [
     titol: "Pilota a l'aro",
     etiqueta: 'Punteria',
     icona: 'i-aro',
+    pos: [67.6, 23.0],
     descripcio: 'Llançament tipus petanca: heu de ficar la pilota dins d\'un cèrcol col·locat a terra.',
     punts: [
       ['Pilota dins del cèrcol', 'Punts'],
@@ -47,6 +51,7 @@ const PROVES = [
     titol: 'Cursa de la cullera',
     etiqueta: 'Equilibri',
     icona: 'i-cullera',
+    pos: [50.0, 24.1],
     descripcio: 'Porteu pilotes de ping-pong del punt A al B amb una cullera a la boca, sense mans. Si cau, tornes a començar.',
     punts: [
       ['Cada pilota que arriba al punt B', '1 punt'],
@@ -57,6 +62,7 @@ const PROVES = [
     titol: 'Tirs de bàsquet',
     etiqueta: 'Bàsquet',
     icona: 'i-basquet',
+    pos: [75.9, 80.6],
     descripcio: 'Tres nivells de tir: tir lliure, mitja distància i triple. I compte: hi ha una ruleta sorpresa!',
     punts: [
       ['Tir lliure', 'Menys punts'],
@@ -69,6 +75,7 @@ const PROVES = [
     titol: 'Encerta la galleda',
     etiqueta: 'Precisió',
     icona: 'i-galleda',
+    pos: [70.5, 37.3],
     descripcio: 'Amb una pala de bàdminton, feu entrar la pilota a una de les 4 galledes.',
     punts: [
       ['Galleda més propera', 'Menys punts'],
@@ -79,6 +86,7 @@ const PROVES = [
     titol: 'El nus humà',
     etiqueta: 'Cooperació',
     icona: 'i-nus',
+    pos: [71.6, 53.1],
     descripcio: 'Amb els ulls tancats, us doneu les mans. Després heu de desfer el nus sense deixar-vos anar.',
     punts: [
       ['Menys de 2 minuts', '4 punts'],
@@ -91,6 +99,7 @@ const PROVES = [
     titol: 'Tir amb arc',
     etiqueta: 'Punteria',
     icona: 'i-arc',
+    pos: [59.1, 63.6],
     descripcio: 'Fletxes amb ventosa contra una diana. Apunta bé i respira.',
     punts: [
       ['Segons la zona de la diana on toqui', 'Punts per zona'],
@@ -101,6 +110,7 @@ const PROVES = [
     titol: "Llançament d'anelles",
     etiqueta: 'Habilitat',
     icona: 'i-anelles',
+    pos: [53.6, 83.3],
     descripcio: 'Encerteu anelles en cons, pals i bitlles.',
     punts: [
       ['Cada objectiu té una puntuació diferent', 'Segons distància'],
@@ -111,6 +121,7 @@ const PROVES = [
     titol: 'Torre de gots',
     etiqueta: 'Construcció',
     icona: 'i-gots',
+    pos: [43.0, 63.0],
     descripcio: 'Reproduïu figures amb gots de plàstic: piràmides, torres, escales…',
     punts: [
       ['Com més difícil és la figura', 'Més punts'],
@@ -294,54 +305,47 @@ modal.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') ompleModal(provaActual - 1);
 });
 
-/* ---------- 7. Esquema SVG de les 10 estacions ---------- */
+/* ---------- 7. Mapa aeri amb les 10 estacions ---------- */
 (function dibuixaEstacions() {
-  const svg = document.getElementById('esquema-estacions');
-  const ns = 'http://www.w3.org/2000/svg';
-  const cx = 200, cy = 200, r = 140;
-  const crea = (tag, attrs) => {
-    const el = document.createElementNS(ns, tag);
-    Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
-    return el;
-  };
+  const mapa = document.getElementById('mapa-estacions');
+  const llegenda = document.getElementById('llegenda-estacions');
 
-  // Cercle de recorregut
-  svg.appendChild(crea('circle', { cx, cy, r, class: 'st-ring' }));
-
-  // Fletxa de sentit de rotació (arc interior)
-  const ra = 92;
-  const a1 = -Math.PI / 2 + 0.35, a2 = -Math.PI / 2 + 1.55;
-  const x1 = cx + ra * Math.cos(a1), y1 = cy + ra * Math.sin(a1);
-  const x2 = cx + ra * Math.cos(a2), y2 = cy + ra * Math.sin(a2);
-  svg.appendChild(crea('path', { d: `M${x1} ${y1} A${ra} ${ra} 0 0 1 ${x2} ${y2}`, class: 'st-arrow' }));
-  const t = a2 + Math.PI / 2; // direcció tangent al final de l'arc
-  const cap = (ang, len) => `${x2 + len * Math.cos(ang)},${y2 + len * Math.sin(ang)}`;
-  svg.appendChild(crea('polygon', {
-    points: `${cap(t, 9)} ${cap(t + 2.4, 9)} ${cap(t - 2.4, 9)}`,
-    class: 'st-arrow-head'
-  }));
-
-  // Punt de trobada central
-  svg.appendChild(crea('circle', { cx, cy, r: 46, class: 'st-center' }));
-  const txt1 = crea('text', { x: cx, y: cy - 3, class: 'st-center-txt' });
-  txt1.textContent = 'PUNT DE';
-  const txt2 = crea('text', { x: cx, y: cy + 14, class: 'st-center-txt' });
-  txt2.textContent = 'TROBADA';
-  svg.append(txt1, txt2);
-
-  // 10 estacions repartides en cercle (la 1 a dalt, sentit horari)
   PROVES.forEach((p, i) => {
-    const ang = -Math.PI / 2 + (i * 2 * Math.PI) / PROVES.length;
-    const x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
-    const g = crea('g', {});
-    const tooltip = crea('title', {});
-    tooltip.textContent = `Estació ${i + 1}: ${p.titol}`;
-    g.appendChild(tooltip);
-    g.appendChild(crea('circle', { cx: x, cy: y, r: 24, class: 'st-dot' }));
-    const n = crea('text', { x, y: y + 1, class: 'st-num' });
-    n.textContent = i + 1;
-    g.appendChild(n);
-    svg.appendChild(g);
+    const n = i + 1;
+
+    // Marcador numerat sobre la imatge
+    const pin = document.createElement('button');
+    pin.type = 'button';
+    pin.className = 'pin';
+    pin.dataset.prova = i;
+    pin.style.left = p.pos[0] + '%';
+    pin.style.top = p.pos[1] + '%';
+    pin.style.setProperty('--retard', `${i * 90}ms`);
+    pin.setAttribute('aria-label', `Estació ${n}: ${p.titol}`);
+    pin.setAttribute('aria-haspopup', 'dialog');
+    pin.innerHTML = `<span aria-hidden="true">${n}</span>`;
+    mapa.appendChild(pin);
+
+    // Element de la llegenda
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <button class="legend__item" type="button" data-prova="${i}" aria-haspopup="dialog">
+        <span class="legend__num" aria-hidden="true">${n}</span>
+        <span class="legend__name"><span class="visually-hidden">Estació ${n}: </span>${p.titol}</span>
+      </button>`;
+    llegenda.appendChild(li);
+  });
+
+  // Ressalta el marcador quan es passa per sobre de la llegenda (i al revés)
+  const ressalta = (i, actiu) => {
+    document.querySelectorAll(`#on [data-prova="${i}"]`).forEach((el) => el.classList.toggle('is-hot', actiu));
+  };
+  document.querySelectorAll('#on [data-prova]').forEach((el) => {
+    const i = el.dataset.prova;
+    ['mouseenter', 'focus'].forEach((ev) => el.addEventListener(ev, () => ressalta(i, true)));
+    ['mouseleave', 'blur'].forEach((ev) => el.addEventListener(ev, () => ressalta(i, false)));
+    // En clicar s'obre la mateixa fitxa que a la secció de proves
+    el.addEventListener('click', () => obreModal(Number(i)));
   });
 })();
 
